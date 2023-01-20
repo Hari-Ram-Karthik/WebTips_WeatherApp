@@ -1,0 +1,103 @@
+.middle {
+    height: auto;
+  }
+.top-line {
+    display: flex;
+    flex-direction: row;
+  }
+.line {
+    align-items: center;
+    color: #ffffff;
+    display: flex;
+    font-size: 140%;
+    justify-content: flex-end;
+    width: 65%;
+  }
+.icons-display-card {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    width: 50%;
+  }
+.icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 35%;
+  }
+.sunny-img {
+    border-bottom-style: solid;
+    border-bottom: #00c0f1;
+  }
+.display-cards-number {
+    color: #ffffff;
+    font-size: 100%;
+  }
+input {
+    background-color: gray;
+    color: #ffffff;
+    width: 30%;
+  }
+.cards-with-navigate {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+  }
+.navigate {
+    background: gray;
+    border-radius: 50%;
+    height: 40px;
+    width: 100px;
+  }
+.navigate-symbol {
+    font-size: 200%;
+    font-weight: bolder;
+    padding-left: 10px;
+  }
+.cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: fit-content;
+  }
+.all-card-with-scroll {
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+.card {
+    background-image: url(/Assets/HTML\ &\ CSS/icons\ for\ cities/kolkata.svg);
+    background-position-x: right;
+    background-position-y: bottom;
+    background-repeat: no-repeat;
+    background-size: 65%;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    height: 260px;
+    justify-content: flex-start;
+    margin: 25px;
+    width: 240px;
+  }
+.first-line {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    font-size: 120%;
+    height: 20%;
+  }
+.img-temp {
+    display: flex;
+    justify-content: flex-end;
+    width: 65%;
+  }
+.humidity {
+    height: 20px;
+    margin-top: 30px;
+  }
+.time-date-middle {
+    height: 20px;
+  }
+.precipitation {
+    height: 20px;
+    margin-top: 25px;
+  }
