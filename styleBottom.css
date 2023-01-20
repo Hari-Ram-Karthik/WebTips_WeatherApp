@@ -49,3 +49,21 @@
       font-size: 110%;
       justify-content: space-between;
   }
+  @media screen and (max-width:750px) {
+    .heading {
+          font-size: 170%;
+      }
+    .sorting {
+          font-size: 100%;
+          width: 30%;
+      }
+  }
+@media screen and (max-width:640px) {
+    .heading {
+          font-size: 150%;
+      }
+    .sorting {
+          font-size: 90%;
+          width: 35%;
+      }
+  }
