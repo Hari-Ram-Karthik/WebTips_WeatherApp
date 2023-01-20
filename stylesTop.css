@@ -1,0 +1,132 @@
+body {
+    margin: 0;
+  }
+.full {
+    align-content: center;
+    background-repeat: no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(Assets/HTML\ &\ CSS/General\ images\ &\ icons/background.svg);
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: auto;
+  }
+.top {
+    align-content: center;
+    display: flex;
+    flex-direction: row;
+    height: 190px;
+    width: auto;
+  }
+.selected-city-image {
+    height: 90px;
+    width: 100px;
+  }
+.city-select-date-time {
+    width: 18%;
+  }
+.city-select {
+    align-items: flex-end;
+    display: flex;
+    height: 45%;
+    margin: 0 auto;
+    width: 80%;
+  }
+.datalist {
+    background-color: gray;
+    background: rgba(131, 131, 131, 0.25);
+    color: white;
+    font-size: 120%;
+    height: 80%;
+    width: 100%;
+  }
+.time-date {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 85%;
+  }
+.time {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+.span-time-date {
+    font-size: 180%;
+  }
+.span-time-second {
+    font-size: 120%;
+  }
+.am-pm-image {
+    height: 50px;
+    padding-left: 10px;
+  }
+.temperature {
+    align-content: space-evenly;
+    color: #ffffff;
+    display: grid;
+    width: 10%;
+  }
+.temp-c {
+    border-right-style: dashed;
+    border-right-color: #f1f1f1;
+  }
+.temp-f {
+    border-right-style: dashed;
+    border-right-color: #f1f1f1;
+  }
+.humidity-precipitation {
+    align-content: space-evenly;
+    color: #ffffff;
+    display: grid;
+    justify-content: end;
+    width: 13%;
+  }
+.temp-value-c {
+    font-size: 175%;
+    padding-left: 30px;
+  }
+.temp-value-f {
+    font-size: 175%;
+    padding-left: 30px;
+  }
+.temp-span {
+    font-size: 175%;
+    padding-left: 10px;
+  }
+.hour-wise-weather {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 50%;
+  }
+.hour-detail {
+    align-items: center;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    max-width: 60px;
+    min-width: 60px;
+  }
+.weather-img {
+    height: 30px;
+  }
+.hour-middle {
+    align-content: center;
+    color: #ffffff;
+    display: flex;
+    flex-wrap: wrap;
+    height: 75%;
+  }
+.hour {
+    font-size: 120%;
+  }
+.middle-bottom {
+    background-color: #121212;
+    border-top-left-radius: 3%;
+    border-top-right-radius: 3%;
+    height: auto;
+    padding: 20px;
+  }
