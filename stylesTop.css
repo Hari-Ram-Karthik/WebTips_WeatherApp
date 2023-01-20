@@ -130,3 +130,169 @@ body {
     height: auto;
     padding: 20px;
   }
+  @media screen and (max-width: 1150px) {
+    .temp-span {
+        font-size: 150%;
+      }
+    .temp-value-c {
+        font-size: 150%;
+      }
+    .temp-value-f {
+        font-size: 150%;
+      }
+    .span-time-date {
+        font-size: 160%;
+      }
+    .span-time-second {
+        font-size: 100%;
+      }
+    .am-pm-image {
+        height: 40px;
+        padding-left: 8px;
+      }
+    .datalist {
+        height: 70%;
+      }
+    .selected-city-image {
+        width: 90px;
+      }
+    .hour {
+        font-size: 110%;
+      }
+    }
+  @media screen and (max-width: 1000px) {
+    .temp-span {
+        font-size: 120%;
+      }
+    .temp-value-c {
+        font-size: 120%;
+        padding-left: 25px;
+      }
+    .temp-value-f {
+        font-size: 120%;
+        padding-left: 18px;
+      }
+    .datalist {
+        height: 60%;
+      }
+    .selected-city-image {
+        padding-top: 4px;
+        width: 80px;
+      }
+    .hour {
+        font-size: 100%;
+      }
+    }
+  @media screen and (max-width: 950px) {
+    .temp-span {
+        font-size: 100%;
+      }
+    .temp-value-c {
+        font-size: 100%;
+      }
+    .temp-value-f {
+        font-size: 100%;
+        padding-left: 16px;
+      }
+    .span-time-date {
+        font-size: 140%;
+      }
+    .span-time-second {
+        font-size: 80%;
+      }
+    .am-pm-image {
+        height: 25px;
+        padding-left: 6px;
+      }
+    .datalist {
+        height: 50%;
+      }
+    .selected-city-image {
+        padding-top: 8px;
+        width: 70px;
+      }
+    .hour {
+        font-size: 90%;
+      }
+    }
+  @media screen and (max-width: 840px) {
+    .temp-span {
+        font-size: 80%;
+      }
+    .temp-value-c {
+        font-size: 80%;
+      }
+    .temp-value-f {
+        font-size: 80%;
+      }
+    .span-time-date {
+        font-size: 110%;
+      }
+    .span-time-second {
+        font-size: 70%;
+      }
+    .am-pm-image {
+        height: 20px;
+        padding-left: 5px;
+      }
+    .datalist {
+        height: 40%;
+      }
+    .selected-city-image {
+        padding-top: 12px;
+        width: 60px;
+      }
+    .hour {
+        font-size: 80%;
+      }
+    .weather-img {
+        height: 25px;
+      }
+    }
+  @media screen and (max-width: 720px) {
+    .weather-img {
+        height: 23px;
+      }
+    .temp-span {
+        font-size: 65%;
+      }
+    .temp-value-c {
+        font-size: 65%;
+        padding-left: 18px;
+      }
+    .temp-value-f {
+        font-size: 65%;
+        padding-left: 14px;
+      }
+    .city-select-date-time {
+        width: 15%;
+      }
+    .hour-wise-weather {
+        width: 55%;
+      }
+    .span-time-date {
+        font-size: 90%;
+      }
+    .selected-city-image {
+        padding-top: 12px;
+      }
+    }
+  @media screen and (max-width: 700px) {
+    .span-time-date {
+        font-size: 70%;
+      }
+    .selected-city-image {
+        padding-top: 17px;
+        width: 50px;
+      }
+    .city-select-date-time {
+        width: 14%;
+      }
+    .hour-wise-weather {
+        width: 60%;
+      }
+    .weather-img {
+        height: 20px;
+      }
+    }
+  
