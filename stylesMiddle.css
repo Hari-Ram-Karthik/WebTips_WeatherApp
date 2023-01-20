@@ -101,3 +101,22 @@ input {
     height: 20px;
     margin-top: 25px;
   }
+  @media screen and (max-width: 1100px) {
+    .line {
+        font-size: 115%;
+        width: 60%;
+      }
+    }
+  @media screen and (max-width: 800px) {
+    .line {
+        width: 50%;
+      }
+    }
+  @media screen and (max-width: 700px) {
+    .line {
+        font-size: 110%;
+      }
+    .display-cards-number {
+        font-size: 90%;
+      }
+    }
