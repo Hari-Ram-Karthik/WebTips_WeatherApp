@@ -67,7 +67,7 @@ input {
   }
 .card {
       box-shadow: 5px 5px 5px 5px gray;
-      background-image: url(Assets/HTML\ &\ CSS/icons\ for\ cities/kolkata.svg);
+      background-image: url(Assets/kolkata.svg);
       background-position-x: right;
       background-position-y: bottom;
       background-repeat: no-repeat;
