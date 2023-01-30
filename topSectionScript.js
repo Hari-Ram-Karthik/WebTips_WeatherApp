@@ -35,6 +35,9 @@ function setValues() {
     setNextFiveHoursTemp();
     setNextFiveHoursImage();
     setNextFiveHoursTime();
+    setTime();
+    clearInterval(timer);
+    timer = setInterval(setTime, 500);
 }
 function setTempPrecipitation() {
   let tempFValue;
@@ -102,4 +105,45 @@ function setNextFiveHoursTime() {
     else if (Number(currentHour) + i + 1 == 24) time.innerText = +12 + "AM";
     else time.innerText = Number(currentHour) + i + 1 - 12 + "PM";
   }
+}
+function setTime() {
+  let currentTimeZone = new Date().toLocaleString("en-US", {
+    timeZone: allData[citySelected].timeZone,
+  });
+  let currentHour = new Date(currentTimeZone).getHours();
+  if (currentHour >= 12) {
+    document.getElementById("time-image").src =
+      "Assets/pmState.svg";
+    if (currentHour != 12) currentHour -= 12;
+  } else if (currentHour == 0) {
+    currentHour = 12;
+    document.getElementById("time-image").src =
+      "Assets/amState.svg";
+  } else {
+    document.getElementById("time-image").src =
+      "Assets/amState.svg";
+  }
+  currentHour = String(currentHour).padStart(2, "0");
+  let currentDate = document.getElementById("current-date");
+  currentDate.innerText =
+    String(new Date(currentTimeZone).getDate()).padStart(2, "0") +
+    "-" +
+    new Date().toLocaleString(
+      "en-US",
+      { month: "short" },
+      { timeZone: currentTimeZone }
+    ) +
+    "-" +
+    new Date(currentTimeZone).getFullYear();
+  let currentTime = document.getElementById("current-time");
+  currentTime.innerText =
+    currentHour +
+    ":" +
+    String(new Date(currentTimeZone).getMinutes()).padStart(2, "0") +
+    ":";
+  let currentSecond = document.getElementById("current-second");
+  currentSecond.innerText = String(
+    new Date(currentTimeZone).getSeconds()
+  ).padStart(2, "0");
+  if (new Date(currentTimeZone).getMinutes() == 0) setNextFiveHoursTime();
 }
