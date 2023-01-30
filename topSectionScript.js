@@ -28,7 +28,6 @@ let errorMessage = document.getElementById("error-message");
 (function() {
   citySelectChange();
 })();
-
 /**
  *function to execute when city changes
  */
@@ -44,7 +43,6 @@ function citySelectChange() {
   if (found != false) setValues();
   else errorCityNotFound();
 }
-
 /**
  *function to set values
  */
@@ -61,7 +59,6 @@ function setValues() {
   clearInterval(timer);
   timer = setInterval(setTime, 500);
 }
-
 /**
  *functions to display error
  */
@@ -97,7 +94,6 @@ function setTempPrecipitation() {
   humidity.innerText = allData[citySelected].humidity;
   precipitation.innerText = allData[citySelected].precipitation;
 }
-
 /**
  *function to set next 5 hrs temperature
  */
@@ -115,7 +111,6 @@ function setNextFiveHoursTemp() {
   );
   fifthHourTemp.innerText = allData[citySelected].nextFiveHrs[3].split("°C", 1);
 }
-
 /**
  *function to set next 5 hrs temperature image
  */
@@ -145,7 +140,6 @@ function setNextFiveHoursImage() {
     if (temp > 29) return "Assets/sunnyIcon.svg";
   }
 }
-
 /**
  *function to set next 5 hrs temperature time
  */
@@ -165,7 +159,6 @@ function setNextFiveHoursTime() {
     else time.innerText = Number(currentHour) + timeNumber + 1 - 12 + "PM";
   }
 }
-
 /**
  *function to set time
  */
