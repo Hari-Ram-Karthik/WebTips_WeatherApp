@@ -9,6 +9,12 @@ let tempC = document.getElementById("temp-c");
 let tempF = document.getElementById("temp-f");
 let humidity = document.getElementById("humidity");
 let precipitation = document.getElementById("precipitation");
+let nowTemp = document.getElementById("now-temp");
+let nextHourTemp = document.getElementById("next-hour-temp");
+let secondHourTemp = document.getElementById("second-hour-temp");
+let thirdHourTemp = document.getElementById("third-hour-temp");
+let fourthHourTemp = document.getElementById("fourth-hour-temp");
+let fifthHourTemp = document.getElementById("fivth-hour-temp");
 (function iife() {
   for (let x in allData) {
     cityOptions.innerHTML =
@@ -25,7 +31,10 @@ function citySelectChange() {
 function setValues() {
   document.getElementById("selected-city-image").src =
     "Assets/" + citySelected + ".svg";
-  setTempPrecipitation();
+    setTempPrecipitation();
+    setNextFiveHoursTemp();
+    setNextFiveHoursImage();
+    setNextFiveHoursTime();
 }
 function setTempPrecipitation() {
   let tempFValue;
@@ -35,4 +44,62 @@ function setTempPrecipitation() {
   tempF.innerText = tempFValue + "°F";
   humidity.innerText = allData[citySelected].humidity;
   precipitation.innerText = allData[citySelected].precipitation;
+}
+function setNextFiveHoursTemp() {
+  nowTemp.innerText = allData[citySelected].temperature.split("°C", 1);
+  nextHourTemp.innerText = allData[citySelected].nextFiveHrs[0].split("°C", 1);
+  secondHourTemp.innerText = allData[citySelected].nextFiveHrs[1].split(
+    "°C",
+    1
+  );
+  thirdHourTemp.innerText = allData[citySelected].nextFiveHrs[2].split("°C", 1);
+  fourthHourTemp.innerText = allData[citySelected].nextFiveHrs[3].split(
+    "°C",
+    1
+  );
+  fifthHourTemp.innerText = allData[citySelected].nextFiveHrs[3].split("°C", 1);
+}
+function setNextFiveHoursImage() {
+  document.getElementById("now-hour-image").src = displayWeatherImage(
+    nowTemp.textContent
+  );
+  document.getElementById("next-hour-image").src = displayWeatherImage(
+    nextHourTemp.textContent
+  );
+  document.getElementById("second-hour-image").src = displayWeatherImage(
+    secondHourTemp.textContent
+  );
+  document.getElementById("third-hour-image").src = displayWeatherImage(
+    thirdHourTemp.textContent
+  );
+  document.getElementById("fourth-hour-image").src = displayWeatherImage(
+    fourthHourTemp.textContent
+  );
+  document.getElementById("fivth-hour-image").src = displayWeatherImage(
+    fifthHourTemp.textContent
+  );
+  function displayWeatherImage(temp) {
+    if (temp >= 23 && temp <= 29)
+      return "Assets/cloudyIcon.svg";
+    if (temp < 18) return "Assets/rainyIcon.svg";
+    if (temp >= 18 && temp <= 22)
+      return "Assets/WindyIcon.svg";
+    if (temp > 29) return "Assets/sunnyIcon.svg";
+  }
+}
+function setNextFiveHoursTime() {
+  let currentTimeZone = new Date().toLocaleString("en-US", {
+    timeZone: allData[citySelected].timeZone,
+  });
+  let currentHour = new Date(currentTimeZone).getHours();
+  for (let i = 0; i < 5; i++) {
+    let time = document.getElementById("time-" + i);
+    if (Number(currentHour) + i + 1 > 24) currentHour -= 24;
+    if (Number(currentHour) + i + 1 < 12)
+      time.innerText = Number(currentHour) + i + 1 + "AM";
+    else if (Number(currentHour) + i + 1 == 12)
+      time.innerText = Number(currentHour) + i + 1 + "PM";
+    else if (Number(currentHour) + i + 1 == 24) time.innerText = +12 + "AM";
+    else time.innerText = Number(currentHour) + i + 1 - 12 + "PM";
+  }
 }
