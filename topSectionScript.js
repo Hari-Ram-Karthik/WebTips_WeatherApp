@@ -25,7 +25,7 @@ let errorMessage = document.getElementById("error-message");
       '">';
   }
 })();
-(function() {
+(function () {
   citySelectChange();
 })();
 
@@ -155,13 +155,14 @@ function setNextFiveHoursTime() {
   });
   let currentHour = new Date(currentTimeZone).getHours();
   for (let timeNumber = 0; timeNumber < 5; timeNumber++) {
-    let time = document.getElementById("time-" +timeNumber);
+    let time = document.getElementById("time-" + timeNumber);
     if (Number(currentHour) + timeNumber + 1 > 24) currentHour -= 24;
     if (Number(currentHour) + timeNumber + 1 < 12)
       time.innerText = Number(currentHour) + timeNumber + 1 + "AM";
     else if (Number(currentHour) + timeNumber + 1 == 12)
       time.innerText = Number(currentHour) + timeNumber + 1 + "PM";
-    else if (Number(currentHour) + timeNumber + 1 == 24) time.innerText = +12 + "AM";
+    else if (Number(currentHour) + timeNumber + 1 == 24)
+      time.innerText = +12 + "AM";
     else time.innerText = Number(currentHour) + timeNumber + 1 - 12 + "PM";
   }
 }
