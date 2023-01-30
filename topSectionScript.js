@@ -15,6 +15,7 @@ let secondHourTemp = document.getElementById("second-hour-temp");
 let thirdHourTemp = document.getElementById("third-hour-temp");
 let fourthHourTemp = document.getElementById("fourth-hour-temp");
 let fifthHourTemp = document.getElementById("fivth-hour-temp");
+let errorMessage = document.getElementById("error-message");
 (function iife() {
   for (let x in allData) {
     cityOptions.innerHTML =
@@ -25,19 +26,40 @@ let fifthHourTemp = document.getElementById("fivth-hour-temp");
   citySelectChange();
 })();
 function citySelectChange() {
+  let found = false;
   citySelected = cityOptionSelected.value.toLowerCase();
-  setValues();
+  for (let x in allData) {
+    if (citySelected == x) {
+      found = true;
+      break;
+    }
+  }
+  if (found != false) setValues();
+  else errorCityNotFound();
 }
 function setValues() {
+  cityOptionSelected.setAttribute("style", "border-color:transperent");
+  errorMessage.innerHTML = "";
   document.getElementById("selected-city-image").src =
     "Assets/" + citySelected + ".svg";
-    setTempPrecipitation();
-    setNextFiveHoursTemp();
-    setNextFiveHoursImage();
-    setNextFiveHoursTime();
-    setTime();
-    clearInterval(timer);
-    timer = setInterval(setTime, 500);
+  setTempPrecipitation();
+  setNextFiveHoursTemp();
+  setNextFiveHoursImage();
+  setNextFiveHoursTime();
+  setTime();
+  clearInterval(timer);
+  timer = setInterval(setTime, 500);
+}
+function errorCityNotFound() {
+  clearInterval(timer);
+  let errorText = document.getElementsByClassName("error-text");
+  for (let i = 0; i < errorText.length; i++) errorText[i].innerText = "Nil";
+  let errorImage = document.getElementsByClassName("error-image");
+  for (let i = 0; i < errorImage.length; i++)
+    errorImage[i].src =
+      "Assets/warning.svg";
+  cityOptionSelected.setAttribute("style", "border-color:red");
+  errorMessage.innerHTML = "<p>Enter valid city name</p>";
 }
 function setTempPrecipitation() {
   let tempFValue;
