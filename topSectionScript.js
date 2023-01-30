@@ -25,6 +25,9 @@ let errorMessage = document.getElementById("error-message");
 (function () {
   citySelectChange();
 })();
+/**
+ *function to execute when city changes
+ */
 function citySelectChange() {
   let found = false;
   citySelected = cityOptionSelected.value.toLowerCase();
@@ -37,6 +40,9 @@ function citySelectChange() {
   if (found != false) setValues();
   else errorCityNotFound();
 }
+/**
+ *function to set values
+ */
 function setValues() {
   cityOptionSelected.setAttribute("style", "border-color:transperent");
   errorMessage.innerHTML = "";
@@ -50,17 +56,22 @@ function setValues() {
   clearInterval(timer);
   timer = setInterval(setTime, 500);
 }
+/**
+ *functions to display error
+ */
 function errorCityNotFound() {
   clearInterval(timer);
   let errorText = document.getElementsByClassName("error-text");
   for (let i = 0; i < errorText.length; i++) errorText[i].innerText = "Nil";
   let errorImage = document.getElementsByClassName("error-image");
   for (let i = 0; i < errorImage.length; i++)
-    errorImage[i].src =
-      "Assets/warning.svg";
+    errorImage[i].src = "Assets/warning.svg";
   cityOptionSelected.setAttribute("style", "border-color:red");
   errorMessage.innerHTML = "<p>Enter valid city name</p>";
 }
+/**
+ *funtion to set temperature and precipitation
+ */
 function setTempPrecipitation() {
   let tempFValue;
   tempC.innerText = allData[citySelected].temperature;
@@ -70,6 +81,9 @@ function setTempPrecipitation() {
   humidity.innerText = allData[citySelected].humidity;
   precipitation.innerText = allData[citySelected].precipitation;
 }
+/**
+ *function to set next 5 hrs temperature
+ */
 function setNextFiveHoursTemp() {
   nowTemp.innerText = allData[citySelected].temperature.split("°C", 1);
   nextHourTemp.innerText = allData[citySelected].nextFiveHrs[0].split("°C", 1);
@@ -84,6 +98,9 @@ function setNextFiveHoursTemp() {
   );
   fifthHourTemp.innerText = allData[citySelected].nextFiveHrs[3].split("°C", 1);
 }
+/**
+ *function to set next 5 hrs temperature image
+ */
 function setNextFiveHoursImage() {
   document.getElementById("now-hour-image").src = displayWeatherImage(
     nowTemp.textContent
@@ -104,14 +121,15 @@ function setNextFiveHoursImage() {
     fifthHourTemp.textContent
   );
   function displayWeatherImage(temp) {
-    if (temp >= 23 && temp <= 29)
-      return "Assets/cloudyIcon.svg";
+    if (temp >= 23 && temp <= 29) return "Assets/cloudyIcon.svg";
     if (temp < 18) return "Assets/rainyIcon.svg";
-    if (temp >= 18 && temp <= 22)
-      return "Assets/WindyIcon.svg";
+    if (temp >= 18 && temp <= 22) return "Assets/WindyIcon.svg";
     if (temp > 29) return "Assets/sunnyIcon.svg";
   }
 }
+/**
+ *function to set next 5 hrs temperature time
+ */
 function setNextFiveHoursTime() {
   let currentTimeZone = new Date().toLocaleString("en-US", {
     timeZone: allData[citySelected].timeZone,
@@ -128,22 +146,22 @@ function setNextFiveHoursTime() {
     else time.innerText = Number(currentHour) + i + 1 - 12 + "PM";
   }
 }
+/**
+ *function to set time
+ */
 function setTime() {
   let currentTimeZone = new Date().toLocaleString("en-US", {
     timeZone: allData[citySelected].timeZone,
   });
   let currentHour = new Date(currentTimeZone).getHours();
   if (currentHour >= 12) {
-    document.getElementById("time-image").src =
-      "Assets/pmState.svg";
+    document.getElementById("time-image").src = "Assets/pmState.svg";
     if (currentHour != 12) currentHour -= 12;
   } else if (currentHour == 0) {
     currentHour = 12;
-    document.getElementById("time-image").src =
-      "Assets/amState.svg";
+    document.getElementById("time-image").src = "Assets/amState.svg";
   } else {
-    document.getElementById("time-image").src =
-      "Assets/amState.svg";
+    document.getElementById("time-image").src = "Assets/amState.svg";
   }
   currentHour = String(currentHour).padStart(2, "0");
   let currentDate = document.getElementById("current-date");
