@@ -8,20 +8,21 @@
       <div class="top">
         <div>
           <img
-          class="selected-city-image"
-          src="Assets/Nome.svg"
-          id="selected-city-image"
-        />
+            class="selected-city-image error-image"
+            src="Assets/Nome.svg"
+            id="selected-city-image"
+          />
         </div>
         <div class="city-select-date-time">
+          <div class="error-message" id="error-message"></div>
           <div class="city-select">
             <input
-            list="city-select"
-            id="city-selected"
-            class="datalist"
-            value="Nome"
-          />
-          <datalist id="city-select"> </datalist>
+              list="city-select"
+              id="city-selected"
+              class="datalist"
+              value="Nome"
+            />
+            <datalist id="city-select"> </datalist>
           </div>
           <div class="time-date">
             <div class="time">
@@ -57,7 +58,7 @@
           <div class="temp-c">
             <span class="temp-span">Temp °C</span>
             <br /><span
-              class="temp-value-c"
+              class="temp-value-c error-text"
               style="font-weight: bolder"
               id="temp-c"
               >25°C</span
@@ -66,7 +67,7 @@
           <div class="temp-f">
             <span class="temp-span">Temp °F</span>
             <br /><span
-              class="temp-value-f"
+              class="temp-value-f error-text"
               style="font-weight: bolder"
               id="temp-f"
               >78°F</span
@@ -77,7 +78,7 @@
           <div>
             <span class="temp-span">Humidity</span>
             <br /><span
-              class="temp-span"
+              class="temp-span error-text"
               style="font-weight: bolder"
               id="humidity"
               >26 %</span
@@ -86,7 +87,7 @@
           <div>
             <span class="temp-span">Precipitation</span>
             <br /><span
-              class="temp-span"
+              class="temp-span error-text"
               style="font-weight: bolder"
               id="precipitation"
               >0 %</span
@@ -103,13 +104,14 @@
             </div>
             <div class="weather-img">
               <img
+                class="error-image"
                 id="now-hour-image"
                 src="Assets/cloudyIcon.svg"
                 height="35px"
               />
             </div>
             <div>
-              <span id="now-temp">6</span>
+              <span id="now-temp" class="error-text">6</span>
             </div>
           </div>
           <div class="hour-middle">
@@ -117,20 +119,21 @@
           </div>
           <div class="hour-detail">
             <div>
-              <span class="hour" id="time-0">11 AM</span>
+              <span class="hour error-text" id="time-0">11 AM</span>
             </div>
             <div>
               <span>|</span>
             </div>
             <div class="weather-img">
               <img
+                class="error-image"
                 id="next-hour-image"
                 src="Assets/rainyIcon.svg"
                 height="35px"
               />
             </div>
             <div>
-              <span id="next-hour-temp">7</span>
+              <span id="next-hour-temp" class="error-text">7</span>
             </div>
           </div>
           <div class="hour-middle">
@@ -138,20 +141,21 @@
           </div>
           <div class="hour-detail">
             <div>
-              <span class="hour" id="time-1">12 PM</span>
+              <span class="hour error-text" id="time-1">12 PM</span>
             </div>
             <div>
               <span>|</span>
             </div>
             <div class="weather-img">
-              <img             
+              <img
+                class="error-image"
                 id="second-hour-image"
                 src="Assets/windyIcon.svg"
                 height="35px"
               />
             </div>
             <div>
-              <span id="second-hour-temp">7</span>
+              <span id="second-hour-temp" class="error-text">7</span>
             </div>
           </div>
           <div class="hour-middle">
@@ -159,20 +163,21 @@
           </div>
           <div class="hour-detail">
             <div>
-              <span class="hour" id="time-2">1 PM</span>
+              <span class="hour error-text" id="time-2">1 PM</span>
             </div>
             <div>
               <span>|</span>
             </div>
             <div class="weather-img">
               <img
+                class="error-image"
                 id="third-hour-image"
                 src="Assets/rainyIcon.svg"
                 height="35px"
               />
             </div>
             <div>
-              <span id="third-hour-temp">8</span>
+              <span id="third-hour-temp" class="error-text">8</span>
             </div>
           </div>
           <div class="hour-middle">
@@ -180,20 +185,21 @@
           </div>
           <div class="hour-detail">
             <div>
-              <span class="hour" id="time-3">2 PM</span>
+              <span class="hour error-text" id="time-3">2 PM</span>
             </div>
             <div>
               <span>|</span>
             </div>
             <div class="weather-img">
               <img
+                class="error-image"
                 id="fourth-hour-image"
                 src="Assets/windyIcon.svg"
                 height="35px"
               />
             </div>
             <div>
-              <span id="fourth-hour-temp">8</span>
+              <span id="fourth-hour-temp" class="error-text">8</span>
             </div>
           </div>
           <div class="hour-middle">
@@ -201,20 +207,21 @@
           </div>
           <div class="hour-detail">
             <div>
-              <span class="hour" id="time-4">3 PM</span>
+              <span class="hour error-text" id="time-4">3 PM</span>
             </div>
             <div>
               <span>|</span>
             </div>
             <div class="weather-img">
               <img
+                class="error-image"
                 id="fivth-hour-image"
                 src="Assets/rainyIcon.svg"
                 height="35px"
               />
             </div>
             <div>
-              <span id="fivth-hour-temp">6</span>
+              <span id="fivth-hour-temp" class="error-text">6</span>
             </div>
           </div>
         </div>
