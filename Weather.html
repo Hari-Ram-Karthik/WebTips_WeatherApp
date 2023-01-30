@@ -14,12 +14,13 @@
         </div>
         <div class="city-select-date-time">
           <div class="city-select">
-            <input list=city-option class="datalist" value="Nome" />
-            <datalist id="city-option">
-              <option value="Nome">
-              <option value="Kolkata">
-              <option value="New Delhi">
-            </datalist>
+            <input
+            list="city-select"
+            id="city-selected"
+            class="datalist"
+            value="Nome"
+          />
+          <datalist id="city-select"> </datalist>
           </div>
           <div class="time-date">
             <div class="time">
@@ -745,5 +746,6 @@
       </div>
     </div>
     <script type="text/javascript" src="data.js"></script>
+    <script type="module" src="topSectionScript.js"></script>
   </body>
 </html>
