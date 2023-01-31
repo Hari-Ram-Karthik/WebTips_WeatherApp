@@ -1,0 +1,748 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="main.css" />
+    <title>Weather</title>
+  </head>
+  <body>
+    <div class="full">
+      <div class="top">
+        <div>
+          <img
+            class="selected-city-image"
+            src="Assets/nome.svg"
+          />
+        </div>
+        <div class="city-select-date-time">
+          <div class="city-select">
+            <input list=city-option class="datalist" value="Nome" />
+            <datalist id="city-option">
+              <option value="Nome">
+              <option value="Kolkata">
+              <option value="New Delhi">
+            </datalist>
+          </div>
+          <div class="time-date">
+            <div class="time">
+              <span
+                class="span-time-date"
+                style="font-weight: 700; color: #ffe5b4"
+                >10:10:</span
+              >
+              <span
+                class="span-time-second"
+                style="font-weight: 400; color: #ffe5b4"
+                >44</span
+              >
+              <img
+                class="am-pm-image"
+                src="Assets/amState.svg"
+              />
+            </div>
+            <div class="date">
+              <span
+                class="span-time-date"
+                style="font-weight: 400; color: #f1f1f1"
+                >01-Mar-2020</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="temperature">
+          <div class="temp-c">
+            <span class="temp-span">Temp °C</span>
+            <br /><span class="temp-value-c" style="font-weight: bolder"
+              >25°C</span
+            >
+          </div>
+          <div class="temp-f">
+            <span class="temp-span">Temp °F</span>
+            <br /><span class="temp-value-f" style="font-weight: bolder"
+              >78°F</span
+            >
+          </div>
+        </div>
+        <div class="humidity-precipitation">
+          <div>
+            <span class="temp-span">Humidity</span>
+            <br /><span class="temp-span" style="font-weight: bolder"
+              >26 %</span
+            >
+          </div>
+          <div>
+            <span class="temp-span">Precipitation</span>
+            <br /><span class="temp-span" style="font-weight: bolder">0 %</span>
+          </div>
+        </div>
+        <div class="hour-wise-weather">
+          <div class="hour-detail">
+            <div>
+              <span class="hour">Now</span>
+            </div>
+            <div>
+              <span>|</span>
+            </div>
+            <div class="weather-img">
+              <img
+                src="Assets/cloudyIcon.svg"
+                height="35px"
+              />
+            </div>
+            <div>
+              <span>6</span>
+            </div>
+          </div>
+          <div class="hour-middle">
+            <span>|</span>
+          </div>
+          <div class="hour-detail">
+            <div>
+              <span class="hour">11 AM</span>
+            </div>
+            <div>
+              <span>|</span>
+            </div>
+            <div class="weather-img">
+              <img
+                src="Assets/rainyIcon.svg"
+                height="35px"
+              />
+            </div>
+            <div>
+              <span>7</span>
+            </div>
+          </div>
+          <div class="hour-middle">
+            <span>|</span>
+          </div>
+          <div class="hour-detail">
+            <div>
+              <span class="hour">12 PM</span>
+            </div>
+            <div>
+              <span>|</span>
+            </div>
+            <div class="weather-img">
+              <img
+                src="Assets/windyIcon.svg"
+                height="35px"
+              />
+            </div>
+            <div>
+              <span>7</span>
+            </div>
+          </div>
+          <div class="hour-middle">
+            <span>|</span>
+          </div>
+          <div class="hour-detail">
+            <div>
+              <span class="hour">1 PM</span>
+            </div>
+            <div>
+              <span>|</span>
+            </div>
+            <div class="weather-img">
+              <img
+                src="Assets/rainyIcon.svg"
+                height="35px"
+              />
+            </div>
+            <div>
+              <span>8</span>
+            </div>
+          </div>
+          <div class="hour-middle">
+            <span>|</span>
+          </div>
+          <div class="hour-detail">
+            <div>
+              <span class="hour">2 PM</span>
+            </div>
+            <div>
+              <span>|</span>
+            </div>
+            <div class="weather-img">
+              <img
+                src="Assets/windyIcon.svg"
+                height="35px"
+              />
+            </div>
+            <div>
+              <span>8</span>
+            </div>
+          </div>
+          <div class="hour-middle">
+            <span>|</span>
+          </div>
+          <div class="hour-detail">
+            <div>
+              <span class="hour">3 PM</span>
+            </div>
+            <div>
+              <span>|</span>
+            </div>
+            <div class="weather-img">
+              <img
+                src="Assets/rainyIcon.svg"
+                height="35px"
+              />
+            </div>
+            <div>
+              <span>6</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="middle-bottom">
+        <div class="middle">
+          <div class="top-line">
+            <div class="line">
+              <span>Top cities around world</span>
+            </div>
+            <div class="icons-display-card">
+              <div class="icon">
+                <img
+                  class="sunny-img"
+                  src="Assets/sunnyIcon.svg"
+                />
+                <img src="Assets/snowflakeIcon.svg" />
+                <img src="Assets/rainyIcon.svg" />
+              </div>
+              <div class="display-cards-number">
+                <p>
+                  Display Top
+                  <input type="number" min="1" max="10" value="4" />
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="cards-with-navigate">
+            <div class="navigate">
+              <span class="navigate-symbol"><</span>
+            </div>
+            <div class="all-card-with-scroll">
+              <div class="cards">
+                <div class="card">
+                  <div class="first-line">
+                    <span>New Delhi</span>
+                    <div class="img-temp">
+                      <img
+                        src="Assets/sunnyIcon.svg"
+                        width="10%"
+                      />
+                      <span>&nbsp;&nbsp;25 °C</span>
+                    </div>
+                  </div>
+                  <div class="time-date-middle">
+                    <span>10:00 AM</span>
+                    <br /><span>2-Mar-2020</span>
+                  </div>
+                  <div class="humidity">
+                    <img
+                      src="Assets/humidityIcon.svg"
+                      width="8%"
+                    />
+                    <span>53 %</span>
+                  </div>
+                  <div class="precipitation">
+                    <img
+                      src="Assets/precipitationIcon.svg"
+                      width="8%"
+                    />
+                    <span>10 %</span>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="first-line">
+                    <span>New Delhi</span>
+                    <div class="img-temp">
+                      <img
+                        src="Assets/sunnyIcon.svg"
+                        width="10%"
+                      />
+                      <span>&nbsp;&nbsp;25 °C</span>
+                    </div>
+                  </div>
+                  <div class="time-date-middle">
+                    <span>10:00 AM</span>
+                    <br /><span>2-Mar-2020</span>
+                  </div>
+                  <div class="humidity">
+                    <img
+                      src="Assets/humidityIcon.svg"
+                      width="8%"
+                    />
+                    <span>53 %</span>
+                  </div>
+                  <div class="precipitation">
+                    <img
+                      src="Assets/precipitationIcon.svg"
+                      width="8%"
+                    />
+                    <span>10 %</span>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="first-line">
+                    <span>New Delhi</span>
+                    <div class="img-temp">
+                      <img
+                        src="Assets/sunnyIcon.svg"
+                        width="10%"
+                      />
+                      <span>&nbsp;&nbsp;25 °C</span>
+                    </div>
+                  </div>
+                  <div class="time-date-middle">
+                    <span>10:00 AM</span>
+                    <br /><span>2-Mar-2020</span>
+                  </div>
+                  <div class="humidity">
+                    <img
+                      src="Assets/humidityIcon.svg"
+                      width="8%"
+                    />
+                    <span>53 %</span>
+                  </div>
+                  <div class="precipitation">
+                    <img
+                      src="Assets/precipitationIcon.svg"
+                      width="8%"
+                    />
+                    <span>10 %</span>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="first-line">
+                    <span>New Delhi</span>
+                    <div class="img-temp">
+                      <img
+                        src="Assets/sunnyIcon.svg"
+                        width="10%"
+                      />
+                      <span>&nbsp;&nbsp;25 °C</span>
+                    </div>
+                  </div>
+                  <div class="time-date-middle">
+                    <span>10:00 AM</span>
+                    <br /><span>2-Mar-2020</span>
+                  </div>
+                  <div class="humidity">
+                    <img
+                      src="Assets/humidityIcon.svg"
+                      width="8%"
+                    />
+                    <span>53 %</span>
+                  </div>
+                  <div class="precipitation">
+                    <img
+                      src="Assets/precipitationIcon.svg"
+                      width="8%"
+                    />
+                    <span>10 %</span>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="first-line">
+                    <span>New Delhi</span>
+                    <div class="img-temp">
+                      <img
+                        src="Assets/sunnyIcon.svg"
+                        width="10%"
+                      />
+                      <span>&nbsp;&nbsp;25 °C</span>
+                    </div>
+                  </div>
+                  <div class="time-date-middle">
+                    <span>10:00 AM</span>
+                    <br /><span>2-Mar-2020</span>
+                  </div>
+                  <div class="humidity">
+                    <img
+                      src="Assets/humidityIcon.svg"
+                      width="8%"
+                    />
+                    <span>53 %</span>
+                  </div>
+                  <div class="precipitation">
+                    <img
+                      src="Assets/precipitationIcon.svg"
+                      width="8%"
+                    />
+                    <span>10 %</span>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="first-line">
+                    <span>New Delhi</span>
+                    <div class="img-temp">
+                      <img
+                        src="Assets/sunnyIcon.svg"
+                        width="10%"
+                      />
+                      <span>&nbsp;&nbsp;25 °C</span>
+                    </div>
+                  </div>
+                  <div class="time-date-middle">
+                    <span>10:00 AM</span>
+                    <br /><span>2-Mar-2020</span>
+                  </div>
+                  <div class="humidity">
+                    <img
+                      src="Assets/humidityIcon.svg"
+                      width="8%"
+                    />
+                    <span>53 %</span>
+                  </div>
+                  <div class="precipitation">
+                    <img
+                      src="Assets/precipitationIcon.svg"
+                      width="8%"
+                    />
+                    <span>10 %</span>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="first-line">
+                    <span>New Delhi</span>
+                    <div class="img-temp">
+                      <img
+                        src="Assets/sunnyIcon.svg"
+                        width="10%"
+                      />
+                      <span>&nbsp;&nbsp;25 °C</span>
+                    </div>
+                  </div>
+                  <div class="time-date-middle">
+                    <span>10:00 AM</span>
+                    <br /><span>2-Mar-2020</span>
+                  </div>
+                  <div class="humidity">
+                    <img
+                      src="Assets/humidityIcon.svg"
+                      width="8%"
+                    />
+                    <span>53 %</span>
+                  </div>
+                  <div class="precipitation">
+                    <img
+                      src="Assets/precipitationIcon.svg"
+                      width="8%"
+                    />
+                    <span>10 %</span>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="first-line">
+                    <span>New Delhi</span>
+                    <div class="img-temp">
+                      <img
+                        src="Assets/sunnyIcon.svg"
+                        width="10%"
+                      />
+                      <span>&nbsp;&nbsp;25 °C</span>
+                    </div>
+                  </div>
+                  <div class="time-date-middle">
+                    <span>10:00 AM</span>
+                    <br /><span>2-Mar-2020</span>
+                  </div>
+                  <div class="humidity">
+                    <img
+                      src="Assets/humidityIcon.svg"
+                      width="8%"
+                    />
+                    <span>53 %</span>
+                  </div>
+                  <div class="precipitation">
+                    <img
+                      src="Assets/precipitationIcon.svg"
+                      width="8%"
+                    />
+                    <span>10 %</span>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="first-line">
+                    <span>New Delhi</span>
+                    <div class="img-temp">
+                      <img
+                        src="Assets/sunnyIcon.svg"
+                        width="10%"
+                      />
+                      <span>&nbsp;&nbsp;25 °C</span>
+                    </div>
+                  </div>
+                  <div class="time-date-middle">
+                    <span>10:00 AM</span>
+                    <br /><span>2-Mar-2020</span>
+                  </div>
+                  <div class="humidity">
+                    <img
+                      src="Assets/humidityIcon.svg"
+                      width="8%"
+                    />
+                    <span>53 %</span>
+                  </div>
+                  <div class="precipitation">
+                    <img
+                      src="Assets/precipitationIcon.svg"
+                      width="8%"
+                    />
+                    <span>10 %</span>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="first-line">
+                    <span>New Delhi</span>
+                    <div class="img-temp">
+                      <img
+                        src="Assets/sunnyIcon.svg"
+                        width="10%"
+                      />
+                      <span>&nbsp;&nbsp;25 °C</span>
+                    </div>
+                  </div>
+                  <div class="time-date-middle">
+                    <span>10:00 AM</span>
+                    <br /><span>2-Mar-2020</span>
+                  </div>
+                  <div class="humidity">
+                    <img
+                      src="Assets/humidityIcon.svg"
+                      width="8%"
+                    />
+                    <span>53 %</span>
+                  </div>
+                  <div class="precipitation">
+                    <img
+                      src="Assets/precipitationIcon.svg"
+                      width="8%"
+                    />
+                    <span>10 %</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="navigate">
+              <span class="navigate-symbol">></span>
+            </div>
+          </div>
+        </div>
+        <div class="bottom">
+          <div class="bottom-top-line">
+            <div class="heading">
+              <span>Cities across continents at a Glance</span>
+            </div>
+            <div class="sorting">
+              <span>Continent Name</span>
+              <img
+                src="Assets/arrowDown.svg"
+                width="20px"
+              />
+              <span>Temperature</span>
+              <img
+                src="Assets/arrowUp.svg"
+                width="20px"
+              />
+            </div>
+          </div>
+          <div class="continent-wise-temp">
+            <div class="continent">
+              <div class="continent-first-line">
+                <span style="color: #ffe5b4">Asia</span>
+                <span style="font-size: 140%">38 °C</span>
+              </div>
+              <div class="continent-second-line">
+                <span>Delhi, 10:10 AM</span>
+                <div class="cotinent-humidity">
+                  <img
+                    src="Assets/humidityIcon.svg"
+                    width="25%"
+                  />
+                  <span>53 %</span>
+                </div>
+              </div>
+            </div>
+            <div class="continent">
+              <div class="continent-first-line">
+                <span style="color: #ffe5b4">Africa</span>
+                <span style="font-size: 140%">38 °C</span>
+              </div>
+              <div class="continent-second-line">
+                <span>Egypt, 10:10 AM</span>
+                <div class="cotinent-humidity">
+                  <img
+                    src="Assets/humidityIcon.svg"
+                    width="25%"
+                  />
+                  <span>53 %</span>
+                </div>
+              </div>
+            </div>
+            <div class="continent">
+              <div class="continent-first-line">
+                <span style="color: #ffe5b4">Europe</span>
+                <span style="font-size: 140%">38 °C</span>
+              </div>
+              <div class="continent-second-line">
+                <span>London, 10:10 AM</span>
+                <div class="cotinent-humidity">
+                  <img
+                    src="Assets/humidityIcon.svg"
+                    width="25%"
+                  />
+                  <span>53 %</span>
+                </div>
+              </div>
+            </div>
+            <div class="continent">
+              <div class="continent-first-line">
+                <span style="color: #ffe5b4">Asia</span>
+                <span style="font-size: 140%">38 °C</span>
+              </div>
+              <div class="continent-second-line">
+                <span>Delhi, 10:10 AM</span>
+                <div class="cotinent-humidity">
+                  <img
+                    src="Assets/humidityIcon.svg"
+                    width="25%"
+                  />
+                  <span>53 %</span>
+                </div>
+              </div>
+            </div>
+            <div class="continent">
+              <div class="continent-first-line">
+                <span style="color: #ffe5b4">Africa</span>
+                <span style="font-size: 140%">38 °C</span>
+              </div>
+              <div class="continent-second-line">
+                <span>Egypt, 10:10 AM</span>
+                <div class="cotinent-humidity">
+                  <img
+                    src="Assets/humidityIcon.svg"
+                    width="25%"
+                  />
+                  <span>53 %</span>
+                </div>
+              </div>
+            </div>
+            <div class="continent">
+              <div class="continent-first-line">
+                <span style="color: #ffe5b4">Europe</span>
+                <span style="font-size: 140%">38 °C</span>
+              </div>
+              <div class="continent-second-line">
+                <span>London, 10:10 AM</span>
+                <div class="cotinent-humidity">
+                  <img
+                    src="Assets/humidityIcon.svg"
+                    width="25%"
+                  />
+                  <span>53 %</span>
+                </div>
+              </div>
+            </div>
+            <div class="continent">
+              <div class="continent-first-line">
+                <span style="color: #ffe5b4">Asia</span>
+                <span style="font-size: 140%">38 °C</span>
+              </div>
+              <div class="continent-second-line">
+                <span>Delhi, 10:10 AM</span>
+                <div class="cotinent-humidity">
+                  <img
+                    src="Assets/humidityIcon.svg"
+                    width="25%"
+                  />
+                  <span>53 %</span>
+                </div>
+              </div>
+            </div>
+            <div class="continent">
+              <div class="continent-first-line">
+                <span style="color: #ffe5b4">Africa</span>
+                <span style="font-size: 140%">38 °C</span>
+              </div>
+              <div class="continent-second-line">
+                <span>Egypt, 10:10 AM</span>
+                <div class="cotinent-humidity">
+                  <img
+                    src="Assets/humidityIcon.svg"
+                    width="25%"
+                  />
+                  <span>53 %</span>
+                </div>
+              </div>
+            </div>
+            <div class="continent">
+              <div class="continent-first-line">
+                <span style="color: #ffe5b4">Europe</span>
+                <span style="font-size: 140%">38 °C</span>
+              </div>
+              <div class="continent-second-line">
+                <span>London, 10:10 AM</span>
+                <div class="cotinent-humidity">
+                  <img
+                    src="Assets/humidityIcon.svg"
+                    width="25%"
+                  />
+                  <span>53 %</span>
+                </div>
+              </div>
+            </div>
+            <div class="continent">
+              <div class="continent-first-line">
+                <span style="color: #ffe5b4">Asia</span>
+                <span style="font-size: 140%">38 °C</span>
+              </div>
+              <div class="continent-second-line">
+                <span>Delhi, 10:10 AM</span>
+                <div class="cotinent-humidity">
+                  <img
+                    src="Assets/humidityIcon.svg"
+                    width="25%"
+                  />
+                  <span>53 %</span>
+                </div>
+              </div>
+            </div>
+            <div class="continent">
+              <div class="continent-first-line">
+                <span style="color: #ffe5b4">Africa</span>
+                <span style="font-size: 140%">38 °C</span>
+              </div>
+              <div class="continent-second-line">
+                <span>Egypt, 10:10 AM</span>
+                <div class="cotinent-humidity">
+                  <img
+                    src="Assets/humidityIcon.svg"
+                    width="25%"
+                  />
+                  <span>53 %</span>
+                </div>
+              </div>
+            </div>
+            <div class="continent">
+              <div class="continent-first-line">
+                <span style="color: #ffe5b4">Europe</span>
+                <span style="font-size: 140%">38 °C</span>
+              </div>
+              <div class="continent-second-line">
+                <span>London, 10:10 AM</span>
+                <div class="cotinent-humidity">
+                  <img
+                    src="Assets/humidityIcon.svg"
+                    width="25%"
+                  />
+                  <span>53 %</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
