@@ -57,6 +57,7 @@ input {
   background: gray;
   border-radius: 50%;
   height: 40px;
+  visibility: hidden;
   width: 100px;
 }
 
@@ -64,13 +65,14 @@ input {
   font-size: 200%;
   font-weight: bolder;
   padding-left: 10px;
+  user-select: none;
 }
 
 .cards {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  width: fit-content;
+  /* width: fit-content; */
 }
 
 .all-card-with-scroll {
@@ -80,19 +82,24 @@ input {
 }
 
 .card {
-  box-shadow: 5px 5px 5px 5px gray;
-  background-image: url(Assets/kolkata.svg);
   background-position-x: right;
   background-position-y: bottom;
   background-repeat: no-repeat;
   background-size: 65%;
+  box-shadow: 5px 5px 5px 5px gray;
   color: #ffffff;
   display: flex;
   flex-direction: column;
   height: 260px;
   justify-content: flex-start;
-  margin: 25px;
-  width: 240px;
+  margin: 20px;
+  padding: 10px;
+  width: 225px;
+}
+
+.card:hover {
+  background-size: 75%;
+  box-shadow: 2px 2px 2px 2px black;
 }
 
 .first-line {
@@ -106,7 +113,7 @@ input {
 .img-temp {
   display: flex;
   justify-content: flex-end;
-  width: 65%;
+  width: 70%;
 }
 
 .humidity {
