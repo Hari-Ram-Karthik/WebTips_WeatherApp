@@ -1,7 +1,11 @@
 let continent = document.querySelector("#continent");
 let allDataCopy = allData;
+let timer;
 (function iife() {
   createContinentCard();
+  setTimeCityName();
+  clearInterval(timer);
+  timer = setInterval(setTimeCityName, 500);
 })();
 function createContinentCard() {
   let continentNumber = 0;
@@ -14,22 +18,27 @@ function createContinentCard() {
       allDataCopy[i].timeZone.split("/")[0];
     clone.querySelector("#continent-temperature").innerText =
       allDataCopy[i].temperature;
-    let cityNameWithTime;
-    cityNameWithTime = allDataCopy[i].cityName;
-    let timeZone = new Date().toLocaleString("en-US", {
-      timeZone: allDataCopy[i].timeZone,
-    });
-    cityNameWithTime += ", ";
-    cityNameWithTime += setTime(timeZone);
-    clone.querySelector("#city-name-time").innerText = cityNameWithTime;
+    clone.querySelector("#city-name-time").id = "city-name-time"+continentNumber;
     clone.querySelector("#continent-humidity").innerText =
       allDataCopy[i].humidity;
-    document.getElementById("all-continents").appendChild(clone);
+    document.getElementById("all-continents").appendChild(clone);  
     continentNumber++;
     if (continentNumber >= 12) break;
   }
 }
-function setTime(timeZone) {
+function setTimeCityName()
+{
+    let continentNumber=0;
+    for(let i in allDataCopy){
+        let timeZone = new Date().toLocaleString("en-US", {
+            timeZone: allDataCopy[i].timeZone,
+          });
+        document.getElementById("city-name-time"+continentNumber).innerHTML=allDataCopy[i].cityName+", "+getTime(timeZone);
+        continentNumber++;
+        if (continentNumber >= 12) break;
+    }
+}
+function getTime(timeZone) {
   let time;
   let hour = new Date(timeZone).getHours();
   if (hour > 12) {
