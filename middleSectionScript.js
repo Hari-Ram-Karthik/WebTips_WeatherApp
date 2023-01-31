@@ -5,7 +5,9 @@ let sunnyDataList;
 let coldDataList;
 let rainyDataList;
 let city = document.querySelector("#card");
+let timer;
 let currentDataList;
+let timeZone;
 /**
 *function to execute when sunny icon is clicked
 */
@@ -29,6 +31,8 @@ function sunnyIconClick() {
   );
   currentDataList = sunnyDataList;
   createCard(sunnyDataList, "sunnyIcon");
+  clearInterval(timer);
+  timer = setInterval(createCard, 500, sunnyDataList, "sunnyIcon");
 }
 /**
  *function to execute when snow icon is clicked
@@ -54,6 +58,8 @@ function snowIconClick() {
   );
   currentDataList = coldDataList;
   createCard(coldDataList, "snowflakeIcon");
+  clearInterval(timer);
+  timer = setInterval(createCard, 500, coldDataList, "snowflakeIcon");
 }
 /**
  *function to execute when rainy icon is clicked
@@ -77,6 +83,8 @@ function rainyIconClick() {
   );
   currentDataList = rainyDataList;
   createCard(rainyDataList, "rainyIcon");
+  clearInterval(timer);
+  timer = setInterval(createCard, 500, rainyDataList, "rainyIcon");
 }
 /**
  *function to create cards
@@ -104,6 +112,53 @@ function rainyIconClick() {
           dataList[i].cityName.toLowerCase() +
           ".svg')"
       );
+      timeZone = new Date().toLocaleString("en-US", {
+        timeZone: dataList[i].timeZone,
+      });
+      setDateTime(clone);
+      clone.setAttribute(
+        "style",
+        "background-image:url('Assets/" +
+          dataList[i].cityName.toLowerCase() +
+          ".svg')"
+      );
       document.getElementById("all-cards").appendChild(clone);
   }
+}
+/**
+ *function to set date and time
+ * @param {*} clone
+ */
+ function setDateTime(clone) {
+  let hour = new Date(timeZone).getHours();
+  if (hour > 12) {
+    clone.querySelector("#city-time").innerText =
+      hour -
+      12 +
+      ":" +
+      String(new Date(timeZone).getMinutes()).padStart(2, "0") +
+      " PM";
+  } else if (hour == 0) {
+    clone.querySelector("#city-time").innerText =
+      "12" +
+      ":" +
+      String(new Date(timeZone).getMinutes()).padStart(2, "0") +
+      " AM";
+  } else {
+    clone.querySelector("#city-time").innerText =
+      hour +
+      ":" +
+      String(new Date(timeZone).getMinutes()).padStart(2, "0") +
+      " AM";
+  }
+  clone.querySelector("#city-date").innerText =
+    String(new Date(timeZone).getDate()).padStart(2, "0") +
+    "-" +
+    new Date().toLocaleString(
+      "en-US",
+      { month: "short" },
+      { timeZone: timeZone }
+    ) +
+    "-" +
+    new Date(timeZone).getFullYear();
 }
