@@ -74,8 +74,9 @@ input {
 }
 
 .all-card-with-scroll {
-  overflow-x: scroll;
+  overflow-x: hidden;
   overflow-y: hidden;
+  width: 200%;
 }
 
 .card {
