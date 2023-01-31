@@ -1,6 +1,7 @@
 document.getElementById("sunny-icon").addEventListener("click", sunnyIconClick);
 document.getElementById("snow-icon").addEventListener("click", snowIconClick);
 document.getElementById("rainy-icon").addEventListener("click", rainyIconClick);
+document.getElementById("display-count").addEventListener("click", countChange);
 document
   .getElementById("navigate-right")
   .addEventListener("click", () => navigator(299.5));
@@ -12,6 +13,7 @@ let coldDataList;
 let rainyDataList;
 let city = document.querySelector("#card");
 let timer;
+let numberOfCards = 3;
 let currentDataList;
 let timeZone;
 /**
@@ -28,6 +30,8 @@ function navigator(value) {
 *function to execute when sunny icon is clicked
 */
 function sunnyIconClick() {
+  numberOfCards = 3;
+  document.getElementById("display-count").value = 3;
   document
     .getElementById("sunny-icon")
     .setAttribute(
@@ -54,6 +58,8 @@ function sunnyIconClick() {
  *function to execute when snow icon is clicked
  */
 function snowIconClick() {
+  numberOfCards = 3;
+  document.getElementById("display-count").value = 3;
   document
     .getElementById("snow-icon")
     .setAttribute(
@@ -81,6 +87,8 @@ function snowIconClick() {
  *function to execute when rainy icon is clicked
  */
 function rainyIconClick() {
+  numberOfCards = 3;
+  document.getElementById("display-count").value = 3;
   document
     .getElementById("rainy-icon")
     .setAttribute(
@@ -111,6 +119,7 @@ function rainyIconClick() {
   let cardNumber = 0;
   document.getElementById("all-cards").replaceChildren();
   for (let i in dataList) {
+    if (cardNumber + 1 <= numberOfCards || cardNumber <= 2) {
       let clone = city.cloneNode(true);
       clone.id = "card" + cardNumber;
       city.before(clone);
@@ -122,12 +131,6 @@ function rainyIconClick() {
         dataList[i].precipitation;
       clone.querySelector("#city-temp-image").src =
         "Assets/" + weatherCondition + ".svg";
-      clone.setAttribute(
-        "style",
-        "background-image:url('Assets/" +
-          dataList[i].cityName.toLowerCase() +
-          ".svg')"
-      );
       timeZone = new Date().toLocaleString("en-US", {
         timeZone: dataList[i].timeZone,
       });
@@ -138,8 +141,11 @@ function rainyIconClick() {
           dataList[i].cityName.toLowerCase() +
           ".svg')"
       );
+      cardNumber++;
       document.getElementById("all-cards").appendChild(clone);
+    }
   }
+  countChange();
 }
 /**
  *function to set date and time
@@ -177,4 +183,38 @@ function rainyIconClick() {
     ) +
     "-" +
     new Date(timeZone).getFullYear();
+}
+/**
+ *function to execute when card count changes
+ */
+ function countChange() {
+  numberOfCards = document.getElementById("display-count").value;
+  let displayCount =
+    numberOfCards < currentDataList.length
+      ? numberOfCards
+      : currentDataList.length;
+  if (
+    displayCount * 282 >=
+    document.getElementById("all-cards-with-navigate").clientWidth
+  ) {
+    document
+      .getElementById("navigate-left")
+      .setAttribute("style", "visibility:visible");
+    document
+      .getElementById("navigate-right")
+      .setAttribute("style", "visibility:visible");
+    document
+      .getElementById("all-cards")
+      .setAttribute("style", "width:fit-content");
+  } else {
+    document
+      .getElementById("navigate-left")
+      .setAttribute("style", "visibility:hidden");
+    document
+      .getElementById("navigate-right")
+      .setAttribute("style", "visibility:hidden");
+    document
+      .getElementById("all-cards")
+      .setAttribute("style", "justify-content:center");
+  }
 }
