@@ -8,6 +8,7 @@ document
 document
   .getElementById("navigate-left")
   .addEventListener("click", () => navigator(-299.5));
+window.addEventListener("resize", countChange);
 let sunnyDataList;
 let coldDataList;
 let rainyDataList;
@@ -17,18 +18,29 @@ let numberOfCards = 3;
 let currentDataList;
 let timeZone;
 /**
+ *function to sleep
+ * @param {*} ms
+ * @return {*} timeout
+ */
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+/**
  *function to navigate through cards(to move)
  * @param {*} value
  */
-function navigator(value) {
-    document.getElementById("all-cards-with-navigate").scrollLeft += value;
+async function navigator(value) {
+  for (let i = 0; i < 10; i++) {
+    await sleep(80);
+    document.getElementById("all-cards-with-navigate").scrollLeft += value / 10;
+  }
 }
 (function iife() {
   sunnyIconClick();
 })();
 /**
-*function to execute when sunny icon is clicked
-*/
+ *function to execute when sunny icon is clicked
+ */
 function sunnyIconClick() {
   numberOfCards = 3;
   document.getElementById("display-count").value = 3;
@@ -115,7 +127,7 @@ function rainyIconClick() {
  * @param {*} dataList
  * @param {*} weatherCondition
  */
- function createCard(dataList, weatherCondition) {
+function createCard(dataList, weatherCondition) {
   let cardNumber = 0;
   document.getElementById("all-cards").replaceChildren();
   for (let i in dataList) {
@@ -151,7 +163,7 @@ function rainyIconClick() {
  *function to set date and time
  * @param {*} clone
  */
- function setDateTime(clone) {
+function setDateTime(clone) {
   let hour = new Date(timeZone).getHours();
   if (hour > 12) {
     clone.querySelector("#city-time").innerText =
@@ -187,7 +199,7 @@ function rainyIconClick() {
 /**
  *function to execute when card count changes
  */
- function countChange() {
+function countChange() {
   numberOfCards = document.getElementById("display-count").value;
   let displayCount =
     numberOfCards < currentDataList.length
