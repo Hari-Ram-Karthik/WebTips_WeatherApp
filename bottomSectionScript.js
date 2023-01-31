@@ -3,7 +3,7 @@ document.getElementById("sort-temperature").addEventListener("click", sortByTemp
 let sortContinentName=document.getElementById("sort-name");
 let sortTemperature=document.getElementById("sort-temperature");
 let continent = document.querySelector("#continent");
-let allDataCopy = allData;
+let allDataCopy = Object.values(allData);
 let timer;
 (function iife() {
   createContinentCard();
@@ -19,13 +19,13 @@ function createContinentCard() {
     clone.id = "continent" + continentNumber;
     continent.before(clone);
     clone.querySelector("#continent-name").innerText =
-      allDataCopy[i].timeZone.split("/")[0];
+      allDataCopy[continentNumber].timeZone.split("/")[0];
     clone.querySelector("#continent-temperature").innerText =
-      allDataCopy[i].temperature;
+      allDataCopy[continentNumber].temperature;
     clone.querySelector("#city-name-time").id =
       "city-name-time" + continentNumber;
     clone.querySelector("#continent-humidity").innerText =
-      allDataCopy[i].humidity;
+      allDataCopy[continentNumber].humidity;
     document.getElementById("all-continents").appendChild(clone);
     continentNumber++;
     if (continentNumber >= 12) break;
@@ -68,6 +68,15 @@ function getTime(timeZone) {
   return time;
 }
 function sortByName() {
+  allDataCopy.sort(function (a, b) {
+    if (a.timeZone.split("/")[0] < b.timeZone.split("/")[0]) {
+      return -1;
+    }
+    if (a.timeZone.split("/")[0] > b.timeZone.split("/")[0]) {
+      return 1;
+    }
+    return 0;
+  });
   if (sortContinentName.name === "arrow-down"){
     sortContinentName.src = "Assets/arrowUp.svg";
     sortContinentName.name="arrow-up";
@@ -75,16 +84,8 @@ function sortByName() {
   else {
     sortContinentName.src = "Assets/arrowDown.svg";
     sortContinentName.name="arrow-down";
+    allDataCopy.reverse();
   }
-  // allDatacopy.sort(function (a, b) {
-  //   if (a.timeZone.split("/")[0] < b.timeZone.split("/")[0]) {
-  //     return -1;
-  //   }
-  //   if (a.timeZone.split("/")[0] > b.timeZone.split("/")[0]) {
-  //     return 1;
-  //   }
-  //   return 0;
-  // });
   createContinentCard();
   setTimeCityName();
   clearInterval(timer);
