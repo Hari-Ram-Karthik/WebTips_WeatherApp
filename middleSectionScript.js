@@ -167,8 +167,7 @@ function setDateTime(clone) {
   let hour = new Date(timeZone).getHours();
   if (hour > 12) {
     clone.querySelector("#city-time").innerText =
-      hour -
-      12 +
+    String(hour-12).padStart(2, "0") +
       ":" +
       String(new Date(timeZone).getMinutes()).padStart(2, "0") +
       " PM";
@@ -180,7 +179,7 @@ function setDateTime(clone) {
       " AM";
   } else {
     clone.querySelector("#city-time").innerText =
-      hour +
+      String(hour).padStart(2, "0") +
       ":" +
       String(new Date(timeZone).getMinutes()).padStart(2, "0") +
       " AM";
