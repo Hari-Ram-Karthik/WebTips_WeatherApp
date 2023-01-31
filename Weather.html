@@ -249,41 +249,40 @@
             </div>
           </div>
           <div class="cards-with-navigate">
-            <div class="navigate">
+            <div class="navigate" id="navigate-left">
               <span class="navigate-symbol"><</span>
             </div>
-            <div class="all-card-with-scroll">
-              <div class="cards">
-                <div class="card">
+            <div class="all-card-with-scroll" id="all-cards-with-navigate">
+              <div class="cards" id="all-cards">
+                <div class="card" id="card">
                   <div class="first-line">
-                    <span>New Delhi</span>
+                    <span id="city-name" style="width: 30%;"></span>
                     <div class="img-temp">
-                      <img
-                        src="Assets/sunnyIcon.svg"
-                        width="10%"
+                      <img                       
+                        width="15%" id="city-temp-image"
                       />
-                      <span>&nbsp;&nbsp;25 °C</span>
+                      <span id="city-temperature" style="font-size: larger;">&nbsp;&nbsp;</span>
                     </div>
                   </div>
                   <div class="time-date-middle">
-                    <span>10:00 AM</span>
-                    <br /><span>2-Mar-2020</span>
+                    <span id="city-time"></span>
+                    <br /><span id="city-date"></span>
                   </div>
                   <div class="humidity">
                     <img
                       src="Assets/humidityIcon.svg"
                       width="8%"
                     />
-                    <span>53 %</span>
+                    <span id="city-humidity"></span>
                   </div>
                   <div class="precipitation">
                     <img
                       src="Assets/precipitationIcon.svg"
                       width="8%"
                     />
-                    <span>10 %</span>
+                    <span id="city-precipitation"></span>
                   </div>
-                </div>              
+                </div>         
               </div>
             </div>
             <div class="navigate">
