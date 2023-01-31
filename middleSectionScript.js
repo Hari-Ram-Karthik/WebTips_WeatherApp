@@ -1,6 +1,12 @@
 document.getElementById("sunny-icon").addEventListener("click", sunnyIconClick);
 document.getElementById("snow-icon").addEventListener("click", snowIconClick);
 document.getElementById("rainy-icon").addEventListener("click", rainyIconClick);
+document
+  .getElementById("navigate-right")
+  .addEventListener("click", () => navigator(299.5));
+document
+  .getElementById("navigate-left")
+  .addEventListener("click", () => navigator(-299.5));
 let sunnyDataList;
 let coldDataList;
 let rainyDataList;
@@ -8,6 +14,16 @@ let city = document.querySelector("#card");
 let timer;
 let currentDataList;
 let timeZone;
+/**
+ *function to navigate through cards(to move)
+ * @param {*} value
+ */
+function navigator(value) {
+    document.getElementById("all-cards-with-navigate").scrollLeft += value;
+}
+(function iife() {
+  sunnyIconClick();
+})();
 /**
 *function to execute when sunny icon is clicked
 */
