@@ -28,6 +28,14 @@ function sleep(ms) {
 }
 
 /**
+ *function to sleep
+ * @param {*} ms
+ * @return {*} timeout
+ */
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+/**
  *function to navigate through cards(to move)
  * @param {*} value
  */
