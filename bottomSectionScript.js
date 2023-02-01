@@ -14,6 +14,9 @@ let timer;
   timer = setInterval(setTimeCityName, 500);
   sortContinent();
 })();
+/**
+ *Function to create continent wise card
+ */
 function createContinentCard() {
   let continentNumber = 0;
   document.getElementById("all-continents").replaceChildren();
@@ -34,6 +37,9 @@ function createContinentCard() {
     if (continentNumber >= 12) break;
   }
 }
+/**
+ *Function to set time and city name
+ */
 function setTimeCityName() {
   let continentNumber = 0;
   for (let i in allDataCopy) {
@@ -46,6 +52,11 @@ function setTimeCityName() {
     if (continentNumber >= 12) break;
   }
 }
+/**
+ *Function to return time
+ * @param {*} timeZone
+ * @return {*} 
+ */
 function getTime(timeZone) {
   let time;
   let hour = new Date(timeZone).getHours();
@@ -70,6 +81,9 @@ function getTime(timeZone) {
   }
   return time;
 }
+/**
+ *Function to work when sort by continent name is clicked
+ */
 function sortByNameClick() {
   if (sortContinentName.name === "arrow-down") {
     sortContinentName.src = "Assets/arrowUp.svg";
@@ -80,6 +94,9 @@ function sortByNameClick() {
   }
   sortContinent();
 }
+/**
+ *Function to work when sort by temperature is clicked
+ */
 function sortByTemperatureClick() {
   if (sortTemperature.name === "arrow-down") {
     sortTemperature.src = "Assets/arrowUp.svg";
@@ -90,6 +107,9 @@ function sortByTemperatureClick() {
   }
   sortContinent();
 }
+/**
+ *Function to sort cards
+ */
 function sortContinent() {
   let continentNameOrder;
   let temperatureOrder;
