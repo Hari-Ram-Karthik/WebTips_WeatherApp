@@ -1,3 +1,35 @@
+class cityData {
+  cityName;
+  timeZone;
+  temperature;
+  humidity;
+  precipitation;
+  nextFiveHrs;
+  constructor(cityData) {
+    this.cityName = cityData.cityName;
+    this.timeZone = cityData.timeZone;
+    this.temperature = cityData.temperature;
+    this.humidity = cityData.humidity;
+    this.precipitation = cityData.precipitation;
+    this.nextFiveHrs = cityData.nextFiveHrs;
+  }
+}
+cityData.prototype.getTimeZone = function () {
+  return this.timeZone;
+};
+cityData.prototype.getTemperature = function () {
+  return this.temperature;
+};
+cityData.prototype.getHumidity = function () {
+  return this.humidity;
+};
+cityData.prototype.getPrecipitation = function () {
+  return this.precipitation;
+};
+cityData.prototype.getNextFiveHrs = function () {
+  return this.nextFiveHrs;
+};
+let city;
 document
   .getElementById("city-selected")
   .addEventListener("change", citySelectChange);
@@ -44,6 +76,7 @@ function citySelectChange() {
  *function to set values
  */
 function setValues() {
+  city = new cityData(allData[citySelected]);
   cityOptionSelected.setAttribute("style", "border-color:transperent");
   errorMessage.innerHTML = "";
   document.getElementById("selected-city-image").src =
@@ -74,29 +107,23 @@ function errorCityNotFound() {
  */
 function setTempPrecipitation() {
   let tempFValue;
-  tempC.innerText = allData[citySelected].temperature;
+  tempC.innerText = city.getTemperature();
   tempFValue = tempC.textContent.split("°C", 1);
   tempFValue = (tempFValue * 1.8 + 32).toFixed(1);
   tempF.innerText = tempFValue + "°F";
-  humidity.innerText = allData[citySelected].humidity;
-  precipitation.innerText = allData[citySelected].precipitation;
+  humidity.innerText = city.getHumidity();
+  precipitation.innerText = city.getPrecipitation();
 }
 /**
  *function to set next 5 hrs temperature
  */
 function setNextFiveHoursTemp() {
-  nowTemp.innerText = allData[citySelected].temperature.split("°C", 1);
-  nextHourTemp.innerText = allData[citySelected].nextFiveHrs[0].split("°C", 1);
-  secondHourTemp.innerText = allData[citySelected].nextFiveHrs[1].split(
-    "°C",
-    1
-  );
-  thirdHourTemp.innerText = allData[citySelected].nextFiveHrs[2].split("°C", 1);
-  fourthHourTemp.innerText = allData[citySelected].nextFiveHrs[3].split(
-    "°C",
-    1
-  );
-  fifthHourTemp.innerText = allData[citySelected].nextFiveHrs[3].split("°C", 1);
+  nowTemp.innerText = city.getTemperature().split("°C", 1);
+  nextHourTemp.innerText=city.getNextFiveHrs()[0].split("°C",1);
+  secondHourTemp.innerText=city.getNextFiveHrs()[1].split("°C",1);
+  thirdHourTemp.innerText=city.getNextFiveHrs()[2].split("°C",1);
+  fourthHourTemp.innerText=city.getNextFiveHrs()[3].split("°C",1);
+  fifthHourTemp.innerText=city.getNextFiveHrs()[3].split("°C",1);
 }
 /**
  *function to set next 5 hrs temperature image
@@ -132,7 +159,7 @@ function setNextFiveHoursImage() {
  */
 function setNextFiveHoursTime() {
   let currentTimeZone = new Date().toLocaleString("en-US", {
-    timeZone: allData[citySelected].timeZone,
+    timeZone: city.getTimeZone(),
   });
   let currentHour = new Date(currentTimeZone).getHours();
   for (let i = 0; i < 5; i++) {
@@ -151,7 +178,7 @@ function setNextFiveHoursTime() {
  */
 function setTime() {
   let currentTimeZone = new Date().toLocaleString("en-US", {
-    timeZone: allData[citySelected].timeZone,
+    timeZone: city.getTimeZone(),
   });
   let currentHour = new Date(currentTimeZone).getHours();
   if (currentHour >= 12) {
