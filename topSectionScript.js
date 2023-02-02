@@ -1,19 +1,11 @@
-class cityData {
-  cityName;
-  timeZone;
-  temperature;
-  humidity;
-  precipitation;
-  nextFiveHrs;
-  constructor(cityData) {
-    this.cityName = cityData.cityName;
-    this.timeZone = cityData.timeZone;
-    this.temperature = cityData.temperature;
-    this.humidity = cityData.humidity;
-    this.precipitation = cityData.precipitation;
-    this.nextFiveHrs = cityData.nextFiveHrs;
-  }
-}
+const cityData = function (cityData) {
+  this.cityName = cityData.cityName;
+  this.timeZone = cityData.timeZone;
+  this.temperature = cityData.temperature;
+  this.humidity = cityData.humidity;
+  this.precipitation = cityData.precipitation;
+  this.nextFiveHrs = cityData.nextFiveHrs;
+};
 cityData.prototype.getTimeZone = function () {
   return this.timeZone;
 };
@@ -119,11 +111,11 @@ function setTempPrecipitation() {
  */
 function setNextFiveHoursTemp() {
   nowTemp.innerText = city.getTemperature().split("°C", 1);
-  nextHourTemp.innerText=city.getNextFiveHrs()[0].split("°C",1);
-  secondHourTemp.innerText=city.getNextFiveHrs()[1].split("°C",1);
-  thirdHourTemp.innerText=city.getNextFiveHrs()[2].split("°C",1);
-  fourthHourTemp.innerText=city.getNextFiveHrs()[3].split("°C",1);
-  fifthHourTemp.innerText=city.getNextFiveHrs()[3].split("°C",1);
+  nextHourTemp.innerText = city.getNextFiveHrs()[0].split("°C", 1);
+  secondHourTemp.innerText = city.getNextFiveHrs()[1].split("°C", 1);
+  thirdHourTemp.innerText = city.getNextFiveHrs()[2].split("°C", 1);
+  fourthHourTemp.innerText = city.getNextFiveHrs()[3].split("°C", 1);
+  fifthHourTemp.innerText = city.getNextFiveHrs()[3].split("°C", 1);
 }
 /**
  *function to set next 5 hrs temperature image
