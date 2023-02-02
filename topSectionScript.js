@@ -1,10 +1,24 @@
-const cityData = function (cityData) {
-  this.cityName = cityData.cityName;
-  this.timeZone = cityData.timeZone;
-  this.temperature = cityData.temperature;
-  this.humidity = cityData.humidity;
-  this.precipitation = cityData.precipitation;
-  this.nextFiveHrs = cityData.nextFiveHrs;
+const cityData = function (cityData) {};
+cityData.prototype.setCityName = function (cityName) {
+  this.cityName = cityName;
+};
+cityData.prototype.setTimeZone = function (timeZone) {
+  this.timeZone = timeZone;
+};
+cityData.prototype.setTemperature = function (temperature) {
+  this.temperature = temperature;
+};
+cityData.prototype.setHumidity = function (humidity) {
+  this.humidity = humidity;
+};
+cityData.prototype.setPrecipitation = function (precipitation) {
+  this.precipitation = precipitation;
+};
+cityData.prototype.setNextFiveHrs = function (nextFiveHrs) {
+  this.nextFiveHrs = nextFiveHrs;
+};
+cityData.prototype.getCityName = function () {
+  return this.cityName;
 };
 cityData.prototype.getTimeZone = function () {
   return this.timeZone;
@@ -40,7 +54,7 @@ let thirdHourTemp = document.getElementById("third-hour-temp");
 let fourthHourTemp = document.getElementById("fourth-hour-temp");
 let fifthHourTemp = document.getElementById("fivth-hour-temp");
 let errorMessage = document.getElementById("error-message");
-(function iife() {
+(function () {
   for (let x in allData) {
     cityOptions.innerHTML =
       cityOptions.innerHTML + '<option value="' + allData[x].cityName + '">';
@@ -68,7 +82,13 @@ function citySelectChange() {
  *function to set values
  */
 function setValues() {
-  city = new cityData(allData[citySelected]);
+  city = new cityData();
+  city.setCityName(allData[citySelected].cityName);
+  city.setTimeZone(allData[citySelected].timeZone);
+  city.setTemperature(allData[citySelected].temperature);
+  city.setHumidity(allData[citySelected].humidity);
+  city.setPrecipitation(allData[citySelected].precipitation);
+  city.setNextFiveHrs(allData[citySelected].nextFiveHrs);
   cityOptionSelected.setAttribute("style", "border-color:transperent");
   errorMessage.innerHTML = "";
   document.getElementById("selected-city-image").src =
