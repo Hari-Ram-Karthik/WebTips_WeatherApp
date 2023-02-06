@@ -1,6 +1,9 @@
 document
 .getElementById("city-selected")
 .addEventListener("change", citySelectChange);
+/**
+ *Prototype function
+ */
 const cityData = function () {};
 cityData.prototype.setDetails = function (cityData) {
   this.cityName = cityData.cityName;
