@@ -9,14 +9,17 @@ document
   .getElementById("navigate-left")
   .addEventListener("click", () => navigator(-299.5));
 window.addEventListener("resize", countChange);
+let cardDetails = function () {};
+cardDetails.prototype = new cityData();
 let sunnyDataList;
 let coldDataList;
 let rainyDataList;
 let city = document.querySelector("#card");
-let timer;
+let timerMiddle;
 let numberOfCards = 3;
 let currentDataList;
 let timeZone;
+let cardObject;
 /**
  *function to sleep
  * @param {*} ms
@@ -63,8 +66,8 @@ function sunnyIconClick() {
   );
   currentDataList = sunnyDataList;
   createCard(sunnyDataList, "sunnyIcon");
-  clearInterval(timer);
-  timer = setInterval(createCard, 500, sunnyDataList, "sunnyIcon");
+  clearInterval(timerMiddle);
+  timerMiddle = setInterval(createCard, 500, sunnyDataList, "sunnyIcon");
 }
 /**
  *function to execute when snow icon is clicked
@@ -92,8 +95,8 @@ function snowIconClick() {
   );
   currentDataList = coldDataList;
   createCard(coldDataList, "snowflakeIcon");
-  clearInterval(timer);
-  timer = setInterval(createCard, 500, coldDataList, "snowflakeIcon");
+  clearInterval(timerMiddle);
+  timerMiddle = setInterval(createCard, 500, coldDataList, "snowflakeIcon");
 }
 /**
  *function to execute when rainy icon is clicked
@@ -119,8 +122,8 @@ function rainyIconClick() {
   );
   currentDataList = rainyDataList;
   createCard(rainyDataList, "rainyIcon");
-  clearInterval(timer);
-  timer = setInterval(createCard, 500, rainyDataList, "rainyIcon");
+  clearInterval(timerMiddle);
+  timerMiddle = setInterval(createCard, 500, rainyDataList, "rainyIcon");
 }
 /**
  *function to create cards
@@ -132,19 +135,22 @@ function createCard(dataList, weatherCondition) {
   document.getElementById("all-cards").replaceChildren();
   for (let i in dataList) {
     if (cardNumber + 1 <= numberOfCards || cardNumber <= 2) {
+      cardObject = new cardDetails();
+      cardObject.setDetails(dataList[i]);
       let clone = city.cloneNode(true);
       clone.id = "card" + cardNumber;
       city.before(clone);
-      clone.querySelector("#city-name").innerText = dataList[i].cityName;
+      clone.querySelector("#city-name").innerText = cardObject.getCityName();
       clone.querySelector("#city-temperature").innerText =
-        dataList[i].temperature;
-      clone.querySelector("#city-humidity").innerText = dataList[i].humidity;
+        cardObject.getTemperature();
+      clone.querySelector("#city-humidity").innerText =
+        cardObject.getHumidity();
       clone.querySelector("#city-precipitation").innerText =
-        dataList[i].precipitation;
+        cardObject.getPrecipitation();
       clone.querySelector("#city-temp-image").src =
         "Assets/" + weatherCondition + ".svg";
       timeZone = new Date().toLocaleString("en-US", {
-        timeZone: dataList[i].timeZone,
+        timeZone: cardObject.getTimeZone(),
       });
       setDateTime(clone);
       clone.setAttribute(
@@ -167,7 +173,7 @@ function setDateTime(clone) {
   let hour = new Date(timeZone).getHours();
   if (hour > 12) {
     clone.querySelector("#city-time").innerText =
-    String(hour-12).padStart(2, "0") +
+      String(hour - 12).padStart(2, "0") +
       ":" +
       String(new Date(timeZone).getMinutes()).padStart(2, "0") +
       " PM";

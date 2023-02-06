@@ -6,12 +6,12 @@ let sortContinentName = document.getElementById("sort-name");
 let sortTemperature = document.getElementById("sort-temperature");
 let continent = document.querySelector("#continent");
 let allDataCopy = Object.values(allData);
-let timer;
+let timerBottom;
 (function iife() {
   createContinentCard();
   setTimeCityName();
-  clearInterval(timer);
-  timer = setInterval(setTimeCityName, 500);
+  clearInterval(timerBottom);
+  timerBottom = setInterval(setTimeCityName, 500);
   sortContinent();
 })();
 /**
@@ -168,6 +168,6 @@ function sortContinent() {
   }
   createContinentCard();
   setTimeCityName();
-  clearInterval(timer);
-  timer = setInterval(setTimeCityName, 500);
+  clearInterval(timerBottom);
+  timerBottom = setInterval(setTimeCityName, 500);
 }
