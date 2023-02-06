@@ -1,21 +1,14 @@
-const cityData = function (cityData) {};
-cityData.prototype.setCityName = function (cityName) {
-  this.cityName = cityName;
-};
-cityData.prototype.setTimeZone = function (timeZone) {
-  this.timeZone = timeZone;
-};
-cityData.prototype.setTemperature = function (temperature) {
-  this.temperature = temperature;
-};
-cityData.prototype.setHumidity = function (humidity) {
-  this.humidity = humidity;
-};
-cityData.prototype.setPrecipitation = function (precipitation) {
-  this.precipitation = precipitation;
-};
-cityData.prototype.setNextFiveHrs = function (nextFiveHrs) {
-  this.nextFiveHrs = nextFiveHrs;
+document
+.getElementById("city-selected")
+.addEventListener("change", citySelectChange);
+const cityData = function () {};
+cityData.prototype.setDetails = function (cityData) {
+  this.cityName = cityData.cityName;
+  this.timeZone = cityData.timeZone;
+  this.temperature = cityData.temperature;
+  this.humidity = cityData.humidity;
+  this.precipitation = cityData.precipitation;
+  this.nextFiveHrs = cityData.nextFiveHrs;
 };
 cityData.prototype.getCityName = function () {
   return this.cityName;
@@ -35,10 +28,7 @@ cityData.prototype.getPrecipitation = function () {
 cityData.prototype.getNextFiveHrs = function () {
   return this.nextFiveHrs;
 };
-let city;
-document
-  .getElementById("city-selected")
-  .addEventListener("change", citySelectChange);
+let cityObject;
 let timer;
 let cityOptionSelected = document.getElementById("city-selected");
 let citySelected;
@@ -82,13 +72,8 @@ function citySelectChange() {
  *function to set values
  */
 function setValues() {
-  city = new cityData();
-  city.setCityName(allData[citySelected].cityName);
-  city.setTimeZone(allData[citySelected].timeZone);
-  city.setTemperature(allData[citySelected].temperature);
-  city.setHumidity(allData[citySelected].humidity);
-  city.setPrecipitation(allData[citySelected].precipitation);
-  city.setNextFiveHrs(allData[citySelected].nextFiveHrs);
+  cityObject = new cityData();
+  cityObject.setDetails(allData[citySelected]);
   cityOptionSelected.setAttribute("style", "border-color:transperent");
   errorMessage.innerHTML = "";
   document.getElementById("selected-city-image").src =
@@ -119,23 +104,23 @@ function errorCityNotFound() {
  */
 function setTempPrecipitation() {
   let tempFValue;
-  tempC.innerText = city.getTemperature();
+  tempC.innerText = cityObject.getTemperature();
   tempFValue = tempC.textContent.split("°C", 1);
   tempFValue = (tempFValue * 1.8 + 32).toFixed(1);
   tempF.innerText = tempFValue + "°F";
-  humidity.innerText = city.getHumidity();
-  precipitation.innerText = city.getPrecipitation();
+  humidity.innerText = cityObject.getHumidity();
+  precipitation.innerText = cityObject.getPrecipitation();
 }
 /**
  *function to set next 5 hrs temperature
  */
 function setNextFiveHoursTemp() {
-  nowTemp.innerText = city.getTemperature().split("°C", 1);
-  nextHourTemp.innerText = city.getNextFiveHrs()[0].split("°C", 1);
-  secondHourTemp.innerText = city.getNextFiveHrs()[1].split("°C", 1);
-  thirdHourTemp.innerText = city.getNextFiveHrs()[2].split("°C", 1);
-  fourthHourTemp.innerText = city.getNextFiveHrs()[3].split("°C", 1);
-  fifthHourTemp.innerText = city.getNextFiveHrs()[3].split("°C", 1);
+  nowTemp.innerText = cityObject.getTemperature().split("°C", 1);
+  nextHourTemp.innerText = cityObject.getNextFiveHrs()[0].split("°C", 1);
+  secondHourTemp.innerText = cityObject.getNextFiveHrs()[1].split("°C", 1);
+  thirdHourTemp.innerText = cityObject.getNextFiveHrs()[2].split("°C", 1);
+  fourthHourTemp.innerText = cityObject.getNextFiveHrs()[3].split("°C", 1);
+  fifthHourTemp.innerText = cityObject.getNextFiveHrs()[3].split("°C", 1);
 }
 /**
  *function to set next 5 hrs temperature image
@@ -171,7 +156,7 @@ function setNextFiveHoursImage() {
  */
 function setNextFiveHoursTime() {
   let currentTimeZone = new Date().toLocaleString("en-US", {
-    timeZone: city.getTimeZone(),
+    timeZone: cityObject.getTimeZone(),
   });
   let currentHour = new Date(currentTimeZone).getHours();
   for (let i = 0; i < 5; i++) {
@@ -190,7 +175,7 @@ function setNextFiveHoursTime() {
  */
 function setTime() {
   let currentTimeZone = new Date().toLocaleString("en-US", {
-    timeZone: city.getTimeZone(),
+    timeZone: cityObject.getTimeZone(),
   });
   let currentHour = new Date(currentTimeZone).getHours();
   if (currentHour >= 12) {
