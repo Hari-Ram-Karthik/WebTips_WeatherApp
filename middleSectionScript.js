@@ -10,10 +10,13 @@ document
   .addEventListener("click", () => navigator(-299.5));
 window.addEventListener("resize", countChange);
 /**
- *Prototype function
+ *Prototype class
  */
-let cardDetails = function () {};
-cardDetails.prototype = new cityData();
+class cardDetails extends cityData {
+  constructor(cityData) { 
+    super(cityData);
+  }
+}
 let sunnyDataList;
 let coldDataList;
 let rainyDataList;
@@ -138,8 +141,7 @@ function createCard(dataList, weatherCondition) {
   document.getElementById("all-cards").replaceChildren();
   for (let i in dataList) {
     if (cardNumber + 1 <= numberOfCards || cardNumber <= 2) {
-      cardObject = new cardDetails();
-      cardObject.setDetails(dataList[i]);
+      cardObject = new cardDetails(dataList[i]);
       let clone = city.cloneNode(true);
       clone.id = "card" + cardNumber;
       city.before(clone);

@@ -3,10 +3,13 @@ document
   .getElementById("sort-temperature")
   .addEventListener("click", sortByTemperatureClick);
 /**
- *Prototype function
+ *Prototype class
  */
-let continentCard = function () {};
-continentCard.__proto__ = new cardDetails();
+class continentCard extends cardDetails{
+  constructor(cityData) {
+    super(cityData);
+   }
+}
 let sortContinentName = document.getElementById("sort-name");
 let sortTemperature = document.getElementById("sort-temperature");
 let continent = document.querySelector("#continent");
@@ -27,20 +30,19 @@ function createContinentCard() {
   let continentNumber = 0;
   document.getElementById("all-continents").replaceChildren();
   for (let i in allDataCopy) {
-    continentCardObject = new continentCard();
-    continentCard.setDetails(allDataCopy[i]);
+    continentCardObject = new continentCard(allDataCopy[i]);
     let clone = continent.cloneNode(true);
     clone.id = "continent" + continentNumber;
     continent.before(clone);
-    clone.querySelector("#continent-name").innerText = continentCard
+    clone.querySelector("#continent-name").innerText = continentCardObject
       .getTimeZone()
       .split("/")[0];
     clone.querySelector("#continent-temperature").innerText =
-      continentCard.getTemperature();
+    continentCardObject.getTemperature();
     clone.querySelector("#city-name-time").id =
       "city-name-time" + continentNumber;
     clone.querySelector("#continent-humidity").innerText =
-      continentCard.getHumidity();
+    continentCardObject.getHumidity();
     document.getElementById("all-continents").appendChild(clone);
     continentNumber++;
     if (continentNumber >= 12) break;
