@@ -9,6 +9,9 @@ document
   .getElementById("navigate-left")
   .addEventListener("click", () => navigator(-299.5));
 window.addEventListener("resize", countChange);
+/**
+ *Prototype function
+ */
 let cardDetails = function () {};
 cardDetails.prototype = new cityData();
 let sunnyDataList;
