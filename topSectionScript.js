@@ -16,23 +16,27 @@ let thirdHourTemp = document.getElementById("third-hour-temp");
 let fourthHourTemp = document.getElementById("fourth-hour-temp");
 let fifthHourTemp = document.getElementById("fivth-hour-temp");
 let errorMessage = document.getElementById("error-message");
-(function iife() {
-  for (let x in allData) {
+(function () {
+  for (let cityData in allData) {
     cityOptions.innerHTML =
-      cityOptions.innerHTML + '<option value="' + allData[x].cityName + '">';
+      cityOptions.innerHTML +
+      '<option value="' +
+      allData[cityData].cityName +
+      '">';
   }
 })();
-(function () {
+(function() {
   citySelectChange();
 })();
+
 /**
  *function to execute when city changes
  */
 function citySelectChange() {
   let found = false;
   citySelected = cityOptionSelected.value.toLowerCase();
-  for (let x in allData) {
-    if (citySelected == x) {
+  for (let cityData in allData) {
+    if (citySelected == cityData) {
       found = true;
       break;
     }
@@ -40,6 +44,7 @@ function citySelectChange() {
   if (found != false) setValues();
   else errorCityNotFound();
 }
+
 /**
  *function to set values
  */
@@ -56,19 +61,30 @@ function setValues() {
   clearInterval(timer);
   timer = setInterval(setTime, 500);
 }
+
 /**
  *functions to display error
  */
 function errorCityNotFound() {
   clearInterval(timer);
   let errorText = document.getElementsByClassName("error-text");
-  for (let i = 0; i < errorText.length; i++) errorText[i].innerText = "Nil";
+  for (
+    let errorTextNumber = 0;
+    errorTextNumber < errorText.length;
+    errorTextNumber++
+  )
+    errorText[errorTextNumber].innerText = "Nil";
   let errorImage = document.getElementsByClassName("error-image");
-  for (let i = 0; i < errorImage.length; i++)
-    errorImage[i].src = "Assets/warning.svg";
+  for (
+    let errorImageNumber = 0;
+    errorImageNumber < errorImage.length;
+    errorImageNumber++
+  )
+    errorImage[errorImageNumber].src = "Assets/warning.svg";
   cityOptionSelected.setAttribute("style", "border-color:red");
   errorMessage.innerHTML = "<p>Enter valid city name</p>";
 }
+
 /**
  *funtion to set temperature and precipitation
  */
@@ -81,6 +97,7 @@ function setTempPrecipitation() {
   humidity.innerText = allData[citySelected].humidity;
   precipitation.innerText = allData[citySelected].precipitation;
 }
+
 /**
  *function to set next 5 hrs temperature
  */
@@ -98,6 +115,7 @@ function setNextFiveHoursTemp() {
   );
   fifthHourTemp.innerText = allData[citySelected].nextFiveHrs[3].split("°C", 1);
 }
+
 /**
  *function to set next 5 hrs temperature image
  */
@@ -127,6 +145,7 @@ function setNextFiveHoursImage() {
     if (temp > 29) return "Assets/sunnyIcon.svg";
   }
 }
+
 /**
  *function to set next 5 hrs temperature time
  */
@@ -135,17 +154,18 @@ function setNextFiveHoursTime() {
     timeZone: allData[citySelected].timeZone,
   });
   let currentHour = new Date(currentTimeZone).getHours();
-  for (let i = 0; i < 5; i++) {
-    let time = document.getElementById("time-" + i);
-    if (Number(currentHour) + i + 1 > 24) currentHour -= 24;
-    if (Number(currentHour) + i + 1 < 12)
-      time.innerText = Number(currentHour) + i + 1 + "AM";
-    else if (Number(currentHour) + i + 1 == 12)
-      time.innerText = Number(currentHour) + i + 1 + "PM";
-    else if (Number(currentHour) + i + 1 == 24) time.innerText = +12 + "AM";
-    else time.innerText = Number(currentHour) + i + 1 - 12 + "PM";
+  for (let timeNumber = 0; timeNumber < 5; timeNumber++) {
+    let time = document.getElementById("time-" +timeNumber);
+    if (Number(currentHour) + timeNumber + 1 > 24) currentHour -= 24;
+    if (Number(currentHour) + timeNumber + 1 < 12)
+      time.innerText = Number(currentHour) + timeNumber + 1 + "AM";
+    else if (Number(currentHour) + timeNumber + 1 == 12)
+      time.innerText = Number(currentHour) + timeNumber + 1 + "PM";
+    else if (Number(currentHour) + timeNumber + 1 == 24) time.innerText = +12 + "AM";
+    else time.innerText = Number(currentHour) + timeNumber + 1 - 12 + "PM";
   }
 }
+
 /**
  *function to set time
  */
