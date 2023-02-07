@@ -25,7 +25,7 @@ let errorMessage = document.getElementById("error-message");
       '">';
   }
 })();
-(function () {
+(function() {
   citySelectChange();
 })();
 
