@@ -2,6 +2,7 @@ document.getElementById("sort-name").addEventListener("click", sortByNameClick);
 document
   .getElementById("sort-temperature")
   .addEventListener("click", sortByTemperatureClick);
+
 /**
  *Prototype class
  */
@@ -13,16 +14,28 @@ class continentCard extends cardDetails{
 let sortContinentName = document.getElementById("sort-name");
 let sortTemperature = document.getElementById("sort-temperature");
 let continent = document.querySelector("#continent");
-let allDataCopy = Object.values(allData);
+let allDataCopy;
 let timerBottom;
 let continentCardObject;
-(function iife() {
+/**
+ *async function to wait to fetch data from glitch
+ */
+ const asyncAwaitBottom = async () => {
+  await new Promise((resolve) => {
+    setTimeout(() => resolve(), 3000);
+  });
+  allDataCopy = Object.values(allData);
   createContinentCard();
   setTimeCityName();
   clearInterval(timerBottom);
   timerBottom = setInterval(setTimeCityName, 500);
   sortContinent();
+};
+
+(function () {
+  asyncAwaitBottom();
 })();
+
 /**
  *Function to create continent wise card
  */
@@ -48,6 +61,7 @@ function createContinentCard() {
     if (continentNumber >= 12) break;
   }
 }
+
 /**
  *Function to set time and city name
  */
@@ -63,6 +77,7 @@ function setTimeCityName() {
     if (continentNumber >= 12) break;
   }
 }
+
 /**
  *Function to return time
  * @param {*} timeZone
@@ -92,6 +107,7 @@ function getTime(timeZone) {
   }
   return time;
 }
+
 /**
  *Function to work when sort by continent name is clicked
  */
@@ -105,6 +121,7 @@ function sortByNameClick() {
   }
   sortContinent();
 }
+
 /**
  *Function to work when sort by temperature is clicked
  */
@@ -118,6 +135,7 @@ function sortByTemperatureClick() {
   }
   sortContinent();
 }
+
 /**
  *Function to sort cards
  */
