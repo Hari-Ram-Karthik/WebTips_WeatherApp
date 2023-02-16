@@ -75,7 +75,6 @@ function citySelectChange() {
   if (found != false) setValues();
   else errorCityNotFound();
 }
-
 /**
  *function to set values
  */
@@ -94,7 +93,6 @@ function setValues() {
   clearInterval(timer);
   timer = setInterval(setTime, 500);
 }
-
 /**
  *functions to display error
  */
@@ -172,7 +170,6 @@ function setNextFiveHoursImage() {
     if (temp > 29) return "Assets/sunnyIcon.svg";
   }
 }
-
 /**
  *function to set next 5 hrs temperature time
  */

@@ -22,7 +22,7 @@ let timerMiddle;
 let numberOfCards = 3;
 let currentDataList;
 let timeZone;
-
+let cardObject;
 /**
  *function to sleep
  * @param {*} ms
@@ -31,7 +31,6 @@ let timeZone;
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
 /**
  *function to sleep
  * @param {*} ms
@@ -53,7 +52,6 @@ async function navigator(value) {
 (function iife() {
   sunnyIconClick();
 })();
-
 /**
  *function to execute when sunny icon is clicked
  */
@@ -82,7 +80,6 @@ function sunnyIconClick() {
   clearInterval(timerMiddle);
   timerMiddle = setInterval(createCard, 500, sunnyDataList, "sunnyIcon");
 }
-
 /**
  *function to execute when snow icon is clicked
  */
@@ -112,7 +109,6 @@ function snowIconClick() {
   clearInterval(timerMiddle);
   timerMiddle = setInterval(createCard, 500, coldDataList, "snowflakeIcon");
 }
-
 /**
  *function to execute when rainy icon is clicked
  */
@@ -140,7 +136,6 @@ function rainyIconClick() {
   clearInterval(timerMiddle);
   timerMiddle = setInterval(createCard, 500, rainyDataList, "rainyIcon");
 }
-
 /**
  *function to create cards
  * @param {*} dataList
@@ -181,7 +176,6 @@ function createCard(dataList, weatherCondition) {
   }
   countChange();
 }
-
 /**
  *function to set date and time
  * @param {*} clone
@@ -218,7 +212,6 @@ function setDateTime(clone) {
     "-" +
     new Date(timeZone).getFullYear();
 }
-
 /**
  *function to execute when card count changes
  */
