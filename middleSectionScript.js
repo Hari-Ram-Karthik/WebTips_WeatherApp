@@ -17,7 +17,6 @@ let timer;
 let numberOfCards = 3;
 let currentDataList;
 let timeZone;
-
 /**
  *function to sleep
  * @param {*} ms
@@ -26,7 +25,6 @@ let timeZone;
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
 /**
  *function to navigate through cards(to move)
  * @param {*} value
@@ -40,7 +38,6 @@ async function navigator(value) {
 (function iife() {
   sunnyIconClick();
 })();
-
 /**
  *function to execute when sunny icon is clicked
  */
@@ -69,7 +66,6 @@ function sunnyIconClick() {
   clearInterval(timer);
   timer = setInterval(createCard, 500, sunnyDataList, "sunnyIcon");
 }
-
 /**
  *function to execute when snow icon is clicked
  */
@@ -99,7 +95,6 @@ function snowIconClick() {
   clearInterval(timer);
   timer = setInterval(createCard, 500, coldDataList, "snowflakeIcon");
 }
-
 /**
  *function to execute when rainy icon is clicked
  */
@@ -127,7 +122,6 @@ function rainyIconClick() {
   clearInterval(timer);
   timer = setInterval(createCard, 500, rainyDataList, "rainyIcon");
 }
-
 /**
  *function to create cards
  * @param {*} dataList
@@ -165,7 +159,6 @@ function createCard(dataList, weatherCondition) {
   }
   countChange();
 }
-
 /**
  *function to set date and time
  * @param {*} clone
@@ -174,8 +167,7 @@ function setDateTime(clone) {
   let hour = new Date(timeZone).getHours();
   if (hour > 12) {
     clone.querySelector("#city-time").innerText =
-      hour -
-      12 +
+    String(hour-12).padStart(2, "0") +
       ":" +
       String(new Date(timeZone).getMinutes()).padStart(2, "0") +
       " PM";
@@ -187,7 +179,7 @@ function setDateTime(clone) {
       " AM";
   } else {
     clone.querySelector("#city-time").innerText =
-      hour +
+      String(hour).padStart(2, "0") +
       ":" +
       String(new Date(timeZone).getMinutes()).padStart(2, "0") +
       " AM";
@@ -202,6 +194,40 @@ function setDateTime(clone) {
     ) +
     "-" +
     new Date(timeZone).getFullYear();
+}
+/**
+ *function to execute when card count changes
+ */
+function countChange() {
+  numberOfCards = document.getElementById("display-count").value;
+  let displayCount =
+    numberOfCards < currentDataList.length
+      ? numberOfCards
+      : currentDataList.length;
+  if (
+    displayCount * 282 >=
+    document.getElementById("all-cards-with-navigate").clientWidth
+  ) {
+    document
+      .getElementById("navigate-left")
+      .setAttribute("style", "visibility:visible");
+    document
+      .getElementById("navigate-right")
+      .setAttribute("style", "visibility:visible");
+    document
+      .getElementById("all-cards")
+      .setAttribute("style", "width:fit-content");
+  } else {
+    document
+      .getElementById("navigate-left")
+      .setAttribute("style", "visibility:hidden");
+    document
+      .getElementById("navigate-right")
+      .setAttribute("style", "visibility:hidden");
+    document
+      .getElementById("all-cards")
+      .setAttribute("style", "justify-content:center");
+  }
 }
 
 /**
