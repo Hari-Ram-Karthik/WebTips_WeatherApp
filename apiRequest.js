@@ -2,7 +2,7 @@
  *async function to fetch all city data from glitch
  */
 const fetchAllCityData = async () => {
-  await fetch("https://soliton.glitch.me/all-timezone-cities")
+  await fetch("http://127.0.0.1:8000/all-timezone-cities")
     .then((response) => {
       return response.json();
     })
@@ -26,7 +26,7 @@ const getHourWeather = async (cityName) => {
     city_Date_Time_Name: "7/19/2021, 3:48:49 AM, Nome",
     hours: 6,
   };
-  await fetch("https://soliton.glitch.me?city=" + cityName)
+  await fetch("http://127.0.0.1:8000?city=" + cityName)
     .then((response) => {
       return response.json();
     })
@@ -41,7 +41,7 @@ const getHourWeather = async (cityName) => {
     body: raw,
     redirect: "follow",
   };
-  await fetch("https://soliton.glitch.me/hourly-forecast", requestOptions)
+  await fetch("http://127.0.0.1:8000/hourly-forecast", requestOptions)
     .then((response) => response.json())
     .then((result) => (hourlyTemp = result))
     .catch((error) => {
