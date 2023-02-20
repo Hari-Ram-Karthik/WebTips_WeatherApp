@@ -22,7 +22,7 @@ let continentCardObject;
  */
 const asyncAwaitBottom = async () => {
   await new Promise((resolve) => {
-    setTimeout(() => resolve(), 3000);
+    setTimeout(() => resolve(), 1000);
   });
   allDataCopy = Object.values(allData);
   createContinentCard();
