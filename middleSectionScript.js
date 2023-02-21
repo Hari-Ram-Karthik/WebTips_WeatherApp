@@ -155,9 +155,9 @@ function rainyIconClick() {
 function createCard(dataList, weatherCondition) {
   let cardNumber = 0;
   document.getElementById("all-cards").replaceChildren();
-  for (let i in dataList) {
+  for (let cityData in dataList) {
     if (cardNumber + 1 <= numberOfCards || cardNumber <= 2) {
-      cardObject = new cardDetails(dataList[i]);
+      cardObject = new cardDetails(dataList[cityData]);
       let clone = city.cloneNode(true);
       clone.id = "card" + cardNumber;
       city.before(clone);
@@ -177,7 +177,7 @@ function createCard(dataList, weatherCondition) {
       clone.setAttribute(
         "style",
         "background-image:url('Assets/" +
-          dataList[i].cityName.toLowerCase() +
+          dataList[cityData].cityName.toLowerCase() +
           ".svg')"
       );
       cardNumber++;
