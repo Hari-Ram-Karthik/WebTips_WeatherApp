@@ -2,35 +2,39 @@ document
 .getElementById("city-selected")
 .addEventListener("change", citySelectChange);
 /**
- *Prototype function
+ *Prototype class
  */
-const cityData = function () {};
-cityData.prototype.setDetails = function (cityData) {
-  this.cityName = cityData.cityName;
-  this.timeZone = cityData.timeZone;
-  this.temperature = cityData.temperature;
-  this.humidity = cityData.humidity;
-  this.precipitation = cityData.precipitation;
-  this.nextFiveHrs = cityData.nextFiveHrs;
-};
-cityData.prototype.getCityName = function () {
-  return this.cityName;
-};
-cityData.prototype.getTimeZone = function () {
-  return this.timeZone;
-};
-cityData.prototype.getTemperature = function () {
-  return this.temperature;
-};
-cityData.prototype.getHumidity = function () {
-  return this.humidity;
-};
-cityData.prototype.getPrecipitation = function () {
-  return this.precipitation;
-};
-cityData.prototype.getNextFiveHrs = function () {
-  return this.nextFiveHrs;
-};
+class cityData {
+  constructor(cityData) { 
+    this.setDetails(cityData);
+  }
+  setDetails(cityData){
+    this.cityName = cityData.cityName;
+    this.timeZone = cityData.timeZone;
+    this.temperature = cityData.temperature;
+    this.humidity = cityData.humidity;
+    this.precipitation = cityData.precipitation;
+    this.nextFiveHrs = cityData.nextFiveHrs;
+  }
+  getCityName() {
+    return this.cityName;
+  }
+  getTimeZone() {
+    return this.timeZone;
+  }
+  getTemperature() {
+    return this.temperature;
+  }
+  getHumidity() {
+    return this.humidity;
+  }
+  getPrecipitation() {
+    return this.precipitation;
+  }
+  getNextFiveHrs() {
+    return this.nextFiveHrs;
+  }
+}
 let cityObject;
 let timer;
 let cityOptionSelected = document.getElementById("city-selected");
@@ -79,8 +83,7 @@ function citySelectChange() {
  *function to set values
  */
 function setValues() {
-  cityObject = new cityData();
-  cityObject.setDetails(allData[citySelected]);
+  cityObject = new cityData(allData[citySelected]);
   cityOptionSelected.setAttribute("style", "border-color:transperent");
   errorMessage.innerHTML = "";
   document.getElementById("selected-city-image").src =

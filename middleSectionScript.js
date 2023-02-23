@@ -10,10 +10,13 @@ document
   .addEventListener("click", () => navigator(-299.5));
 window.addEventListener("resize", countChange);
 /**
- *Prototype function
+ *Prototype class
  */
-let cardDetails = function () {};
-cardDetails.prototype = new cityData();
+class cardDetails extends cityData {
+  constructor(cityData) { 
+    super(cityData);
+  }
+}
 let sunnyDataList;
 let coldDataList;
 let rainyDataList;
@@ -23,14 +26,6 @@ let numberOfCards = 3;
 let currentDataList;
 let timeZone;
 let cardObject;
-/**
- *function to sleep
- * @param {*} ms
- * @return {*} timeout
- */
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 /**
  *function to sleep
  * @param {*} ms
@@ -146,8 +141,7 @@ function createCard(dataList, weatherCondition) {
   document.getElementById("all-cards").replaceChildren();
   for (let cityData in dataList) {
     if (cardNumber + 1 <= numberOfCards || cardNumber <= 2) {
-      cardObject = new cardDetails();
-      cardObject.setDetails(dataList[cityData]);
+      cardObject = new cardDetails(dataList[i]);
       let clone = city.cloneNode(true);
       clone.id = "card" + cardNumber;
       city.before(clone);

@@ -3,10 +3,13 @@ document
   .getElementById("sort-temperature")
   .addEventListener("click", sortByTemperatureClick);
 /**
- *Prototype function
+ *Prototype class
  */
-let continentCard = function () {};
-continentCard.__proto__ = new cardDetails();
+class continentCard extends cardDetails{
+  constructor(cityData) {
+    super(cityData);
+   }
+}
 let sortContinentName = document.getElementById("sort-name");
 let sortTemperature = document.getElementById("sort-temperature");
 let continent = document.querySelector("#continent");
