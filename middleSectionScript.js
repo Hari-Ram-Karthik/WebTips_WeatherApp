@@ -258,38 +258,3 @@ function countChange() {
       .setAttribute("style", "justify-content:center");
   }
 }
-
-/**
- *function to execute when card count changes
- */
-function countChange() {
-  numberOfCards = document.getElementById("display-count").value;
-  let displayCount =
-    numberOfCards < currentDataList.length
-      ? numberOfCards
-      : currentDataList.length;
-  if (
-    displayCount * 282 >=
-    document.getElementById("all-cards-with-navigate").clientWidth
-  ) {
-    document
-      .getElementById("navigate-left")
-      .setAttribute("style", "visibility:visible");
-    document
-      .getElementById("navigate-right")
-      .setAttribute("style", "visibility:visible");
-    document
-      .getElementById("all-cards")
-      .setAttribute("style", "width:fit-content");
-  } else {
-    document
-      .getElementById("navigate-left")
-      .setAttribute("style", "visibility:hidden");
-    document
-      .getElementById("navigate-right")
-      .setAttribute("style", "visibility:hidden");
-    document
-      .getElementById("all-cards")
-      .setAttribute("style", "justify-content:center");
-  }
-}
