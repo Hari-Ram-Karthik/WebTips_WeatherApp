@@ -1,20 +1,20 @@
 document
-.getElementById("city-selected")
-.addEventListener("change", citySelectChange);
+  .querySelector("#city-selected")
+  .addEventListener("change", citySelectChange);
 /**
  *Prototype class
  */
 class cityData {
-  constructor(cityData) { 
+  constructor(cityData) {
     this.setDetails(cityData);
   }
-  setDetails(cityData){
+  setDetails(cityData) {
     this.cityName = cityData.cityName;
     this.timeZone = cityData.timeZone;
     this.temperature = cityData.temperature;
     this.humidity = cityData.humidity;
     this.precipitation = cityData.precipitation;
-    this.nextFiveHrs = cityData.nextFiveHrs;
+    this.nextFiveHrs = hourlyTemp.temperature;
   }
   getCityName() {
     return this.cityName;
@@ -35,10 +35,11 @@ class cityData {
     return this.nextFiveHrs;
   }
 }
+let allData;
 let cityObject;
 let timer;
 let cityOptionSelected = document.getElementById("city-selected");
-let citySelected;
+let citySelectedIndex;
 let cityOptions = document.getElementById("city-select");
 let tempC = document.getElementById("temp-c");
 let tempF = document.getElementById("temp-f");
@@ -50,8 +51,10 @@ let secondHourTemp = document.getElementById("second-hour-temp");
 let thirdHourTemp = document.getElementById("third-hour-temp");
 let fourthHourTemp = document.getElementById("fourth-hour-temp");
 let fifthHourTemp = document.getElementById("fivth-hour-temp");
+let hourlyTemp = [];
 let errorMessage = document.getElementById("error-message");
-(function () {
+const fetchData = async () => {
+  await fetchAllCityData();
   for (let cityData in allData) {
     cityOptions.innerHTML =
       cityOptions.innerHTML +
@@ -59,35 +62,39 @@ let errorMessage = document.getElementById("error-message");
       allData[cityData].cityName +
       '">';
   }
-})();
-(function () {
   citySelectChange();
+};
+
+(function () {
+  fetchData();
 })();
 
 /**
  *function to execute when city changes
  */
-function citySelectChange() {
+async function citySelectChange() {
+  await getHourWeather(cityOptionSelected.value);
   let found = false;
-  citySelected = cityOptionSelected.value.toLowerCase();
-  for (let cityData in allData) {
-    if (citySelected == cityData) {
+  for (let cityDataIndex in allData) {
+    if (cityOptionSelected.value == allData[cityDataIndex].cityName) {
       found = true;
+      citySelectedIndex = cityDataIndex;
       break;
     }
   }
   if (found != false) setValues();
   else errorCityNotFound();
 }
+
 /**
  *function to set values
  */
 function setValues() {
-  cityObject = new cityData(allData[citySelected]);
+  cityObject = new cityData(allData[citySelectedIndex]);
   cityOptionSelected.setAttribute("style", "border-color:transperent");
   errorMessage.innerHTML = "";
   document.getElementById("selected-city-image").src =
-    "Assets/" + citySelected + ".svg";
+    "Assets/" + allData[citySelectedIndex].cityName + ".svg";
   setTempPrecipitation();
   setNextFiveHoursTemp();
   setNextFiveHoursImage();
@@ -96,6 +103,7 @@ function setValues() {
   clearInterval(timer);
   timer = setInterval(setTime, 500);
 }
+
 /**
  *functions to display error
  */
@@ -141,7 +149,7 @@ function setNextFiveHoursTemp() {
   secondHourTemp.innerText = cityObject.getNextFiveHrs()[1].split("°C", 1);
   thirdHourTemp.innerText = cityObject.getNextFiveHrs()[2].split("°C", 1);
   fourthHourTemp.innerText = cityObject.getNextFiveHrs()[3].split("°C", 1);
-  fifthHourTemp.innerText = cityObject.getNextFiveHrs()[3].split("°C", 1);
+  fifthHourTemp.innerText = cityObject.getNextFiveHrs()[4].split("°C", 1);
 }
 
 /**
@@ -173,6 +181,7 @@ function setNextFiveHoursImage() {
     if (temp > 29) return "Assets/sunnyIcon.svg";
   }
 }
+
 /**
  *function to set next 5 hrs temperature time
  */

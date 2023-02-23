@@ -13,7 +13,7 @@ window.addEventListener("resize", countChange);
  *Prototype class
  */
 class cardDetails extends cityData {
-  constructor(cityData) { 
+  constructor(cityData) {
     super(cityData);
   }
 }
@@ -34,6 +34,7 @@ let cardObject;
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
 /**
  *function to navigate through cards(to move)
  * @param {*} value
@@ -44,9 +45,21 @@ async function navigator(value) {
     document.getElementById("all-cards-with-navigate").scrollLeft += value / 10;
   }
 }
-(function iife() {
+
+/**
+ *async function to wait to fetch data from glitch
+ */
+const asyncAwaitMiddle = async () => {
+  await new Promise((resolve) => {
+    setTimeout(() => resolve(), 3000);
+  });
   sunnyIconClick();
+};
+
+(function () {
+  asyncAwaitMiddle();
 })();
+
 /**
  *function to execute when sunny icon is clicked
  */
@@ -75,6 +88,7 @@ function sunnyIconClick() {
   clearInterval(timerMiddle);
   timerMiddle = setInterval(createCard, 500, sunnyDataList, "sunnyIcon");
 }
+
 /**
  *function to execute when snow icon is clicked
  */
@@ -104,6 +118,7 @@ function snowIconClick() {
   clearInterval(timerMiddle);
   timerMiddle = setInterval(createCard, 500, coldDataList, "snowflakeIcon");
 }
+
 /**
  *function to execute when rainy icon is clicked
  */
@@ -131,6 +146,7 @@ function rainyIconClick() {
   clearInterval(timerMiddle);
   timerMiddle = setInterval(createCard, 500, rainyDataList, "rainyIcon");
 }
+
 /**
  *function to create cards
  * @param {*} dataList
@@ -141,7 +157,7 @@ function createCard(dataList, weatherCondition) {
   document.getElementById("all-cards").replaceChildren();
   for (let cityData in dataList) {
     if (cardNumber + 1 <= numberOfCards || cardNumber <= 2) {
-      cardObject = new cardDetails(dataList[i]);
+      cardObject = new cardDetails(dataList[cityData]);
       let clone = city.cloneNode(true);
       clone.id = "card" + cardNumber;
       city.before(clone);
@@ -170,6 +186,7 @@ function createCard(dataList, weatherCondition) {
   }
   countChange();
 }
+
 /**
  *function to set date and time
  * @param {*} clone
@@ -206,6 +223,7 @@ function setDateTime(clone) {
     "-" +
     new Date(timeZone).getFullYear();
 }
+
 /**
  *function to execute when card count changes
  */

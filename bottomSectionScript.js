@@ -2,27 +2,40 @@ document.getElementById("sort-name").addEventListener("click", sortByNameClick);
 document
   .getElementById("sort-temperature")
   .addEventListener("click", sortByTemperatureClick);
+
 /**
  *Prototype class
  */
-class continentCard extends cardDetails{
+class continentCard extends cardDetails {
   constructor(cityData) {
     super(cityData);
-   }
+  }
 }
 let sortContinentName = document.getElementById("sort-name");
 let sortTemperature = document.getElementById("sort-temperature");
 let continent = document.querySelector("#continent");
-let allDataCopy = Object.values(allData);
+let allDataCopy;
 let timerBottom;
 let continentCardObject;
-(function iife() {
+/**
+ *async function to wait to fetch data from glitch
+ */
+const asyncAwaitBottom = async () => {
+  await new Promise((resolve) => {
+    setTimeout(() => resolve(), 3000);
+  });
+  allDataCopy = Object.values(allData);
   createContinentCard();
   setTimeCityName();
   clearInterval(timerBottom);
   timerBottom = setInterval(setTimeCityName, 500);
   sortContinent();
+};
+
+(function () {
+  asyncAwaitBottom();
 })();
+
 /**
  *Function to create continent wise card
  */
@@ -30,25 +43,25 @@ function createContinentCard() {
   let continentNumber = 0;
   document.getElementById("all-continents").replaceChildren();
   for (let cityData in allDataCopy) {
-    continentCardObject = new continentCard();
-    continentCard.setDetails(allDataCopy[cityData]);
+    continentCardObject = new continentCard(allDataCopy[cityData]);
     let clone = continent.cloneNode(true);
     clone.id = "continent" + continentNumber;
     continent.before(clone);
-    clone.querySelector("#continent-name").innerText = continentCard
+    clone.querySelector("#continent-name").innerText = continentCardObject
       .getTimeZone()
       .split("/")[0];
     clone.querySelector("#continent-temperature").innerText =
-      continentCard.getTemperature();
+      continentCardObject.getTemperature();
     clone.querySelector("#city-name-time").id =
       "city-name-time" + continentNumber;
     clone.querySelector("#continent-humidity").innerText =
-      continentCard.getHumidity();
+      continentCardObject.getHumidity();
     document.getElementById("all-continents").appendChild(clone);
     continentNumber++;
     if (continentNumber >= 12) break;
   }
 }
+
 /**
  *Function to set time and city name
  */
@@ -64,6 +77,7 @@ function setTimeCityName() {
     if (continentNumber >= 12) break;
   }
 }
+
 /**
  *Function to return time
  * @param {*} timeZone
@@ -93,6 +107,7 @@ function getTime(timeZone) {
   }
   return time;
 }
+
 /**
  *Function to work when sort by continent name is clicked
  */
@@ -106,6 +121,7 @@ function sortByNameClick() {
   }
   sortContinent();
 }
+
 /**
  *Function to work when sort by temperature is clicked
  */
@@ -119,6 +135,7 @@ function sortByTemperatureClick() {
   }
   sortContinent();
 }
+
 /**
  *Function to sort cards
  */
