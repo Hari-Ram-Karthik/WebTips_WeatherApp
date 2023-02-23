@@ -139,7 +139,7 @@ function rainyIconClick() {
 function createCard(dataList, weatherCondition) {
   let cardNumber = 0;
   document.getElementById("all-cards").replaceChildren();
-  for (let i in dataList) {
+  for (let cityData in dataList) {
     if (cardNumber + 1 <= numberOfCards || cardNumber <= 2) {
       cardObject = new cardDetails(dataList[i]);
       let clone = city.cloneNode(true);
@@ -161,7 +161,7 @@ function createCard(dataList, weatherCondition) {
       clone.setAttribute(
         "style",
         "background-image:url('Assets/" +
-          dataList[i].cityName.toLowerCase() +
+          dataList[cityData].cityName.toLowerCase() +
           ".svg')"
       );
       cardNumber++;
@@ -206,41 +206,6 @@ function setDateTime(clone) {
     "-" +
     new Date(timeZone).getFullYear();
 }
-/**
- *function to execute when card count changes
- */
-function countChange() {
-  numberOfCards = document.getElementById("display-count").value;
-  let displayCount =
-    numberOfCards < currentDataList.length
-      ? numberOfCards
-      : currentDataList.length;
-  if (
-    displayCount * 282 >=
-    document.getElementById("all-cards-with-navigate").clientWidth
-  ) {
-    document
-      .getElementById("navigate-left")
-      .setAttribute("style", "visibility:visible");
-    document
-      .getElementById("navigate-right")
-      .setAttribute("style", "visibility:visible");
-    document
-      .getElementById("all-cards")
-      .setAttribute("style", "width:fit-content");
-  } else {
-    document
-      .getElementById("navigate-left")
-      .setAttribute("style", "visibility:hidden");
-    document
-      .getElementById("navigate-right")
-      .setAttribute("style", "visibility:hidden");
-    document
-      .getElementById("all-cards")
-      .setAttribute("style", "justify-content:center");
-  }
-}
-
 /**
  *function to execute when card count changes
  */
