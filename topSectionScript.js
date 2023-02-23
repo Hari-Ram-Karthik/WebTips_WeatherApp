@@ -1,6 +1,37 @@
 document
-  .getElementById("city-selected")
-  .addEventListener("change", citySelectChange);
+.getElementById("city-selected")
+.addEventListener("change", citySelectChange);
+/**
+ *Prototype function
+ */
+const cityData = function () {};
+cityData.prototype.setDetails = function (cityData) {
+  this.cityName = cityData.cityName;
+  this.timeZone = cityData.timeZone;
+  this.temperature = cityData.temperature;
+  this.humidity = cityData.humidity;
+  this.precipitation = cityData.precipitation;
+  this.nextFiveHrs = cityData.nextFiveHrs;
+};
+cityData.prototype.getCityName = function () {
+  return this.cityName;
+};
+cityData.prototype.getTimeZone = function () {
+  return this.timeZone;
+};
+cityData.prototype.getTemperature = function () {
+  return this.temperature;
+};
+cityData.prototype.getHumidity = function () {
+  return this.humidity;
+};
+cityData.prototype.getPrecipitation = function () {
+  return this.precipitation;
+};
+cityData.prototype.getNextFiveHrs = function () {
+  return this.nextFiveHrs;
+};
+let cityObject;
 let timer;
 let cityOptionSelected = document.getElementById("city-selected");
 let citySelected;
@@ -25,9 +56,10 @@ let errorMessage = document.getElementById("error-message");
       '">';
   }
 })();
-(function() {
+(function () {
   citySelectChange();
 })();
+
 /**
  *function to execute when city changes
  */
@@ -47,6 +79,8 @@ function citySelectChange() {
  *function to set values
  */
 function setValues() {
+  cityObject = new cityData();
+  cityObject.setDetails(allData[citySelected]);
   cityOptionSelected.setAttribute("style", "border-color:transperent");
   errorMessage.innerHTML = "";
   document.getElementById("selected-city-image").src =
@@ -87,30 +121,26 @@ function errorCityNotFound() {
  */
 function setTempPrecipitation() {
   let tempFValue;
-  tempC.innerText = allData[citySelected].temperature;
+  tempC.innerText = cityObject.getTemperature();
   tempFValue = tempC.textContent.split("°C", 1);
   tempFValue = (tempFValue * 1.8 + 32).toFixed(1);
   tempF.innerText = tempFValue + "°F";
-  humidity.innerText = allData[citySelected].humidity;
-  precipitation.innerText = allData[citySelected].precipitation;
+  humidity.innerText = cityObject.getHumidity();
+  precipitation.innerText = cityObject.getPrecipitation();
 }
+
 /**
  *function to set next 5 hrs temperature
  */
 function setNextFiveHoursTemp() {
-  nowTemp.innerText = allData[citySelected].temperature.split("°C", 1);
-  nextHourTemp.innerText = allData[citySelected].nextFiveHrs[0].split("°C", 1);
-  secondHourTemp.innerText = allData[citySelected].nextFiveHrs[1].split(
-    "°C",
-    1
-  );
-  thirdHourTemp.innerText = allData[citySelected].nextFiveHrs[2].split("°C", 1);
-  fourthHourTemp.innerText = allData[citySelected].nextFiveHrs[3].split(
-    "°C",
-    1
-  );
-  fifthHourTemp.innerText = allData[citySelected].nextFiveHrs[3].split("°C", 1);
+  nowTemp.innerText = cityObject.getTemperature().split("°C", 1);
+  nextHourTemp.innerText = cityObject.getNextFiveHrs()[0].split("°C", 1);
+  secondHourTemp.innerText = cityObject.getNextFiveHrs()[1].split("°C", 1);
+  thirdHourTemp.innerText = cityObject.getNextFiveHrs()[2].split("°C", 1);
+  fourthHourTemp.innerText = cityObject.getNextFiveHrs()[3].split("°C", 1);
+  fifthHourTemp.innerText = cityObject.getNextFiveHrs()[3].split("°C", 1);
 }
+
 /**
  *function to set next 5 hrs temperature image
  */
@@ -145,26 +175,28 @@ function setNextFiveHoursImage() {
  */
 function setNextFiveHoursTime() {
   let currentTimeZone = new Date().toLocaleString("en-US", {
-    timeZone: allData[citySelected].timeZone,
+    timeZone: cityObject.getTimeZone(),
   });
   let currentHour = new Date(currentTimeZone).getHours();
   for (let timeNumber = 0; timeNumber < 5; timeNumber++) {
-    let time = document.getElementById("time-" +timeNumber);
+    let time = document.getElementById("time-" + timeNumber);
     if (Number(currentHour) + timeNumber + 1 > 24) currentHour -= 24;
     if (Number(currentHour) + timeNumber + 1 < 12)
       time.innerText = Number(currentHour) + timeNumber + 1 + "AM";
     else if (Number(currentHour) + timeNumber + 1 == 12)
       time.innerText = Number(currentHour) + timeNumber + 1 + "PM";
-    else if (Number(currentHour) + timeNumber + 1 == 24) time.innerText = +12 + "AM";
+    else if (Number(currentHour) + timeNumber + 1 == 24)
+      time.innerText = +12 + "AM";
     else time.innerText = Number(currentHour) + timeNumber + 1 - 12 + "PM";
   }
 }
+
 /**
  *function to set time
  */
 function setTime() {
   let currentTimeZone = new Date().toLocaleString("en-US", {
-    timeZone: allData[citySelected].timeZone,
+    timeZone: cityObject.getTimeZone(),
   });
   let currentHour = new Date(currentTimeZone).getHours();
   if (currentHour >= 12) {

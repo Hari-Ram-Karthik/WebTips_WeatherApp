@@ -9,14 +9,28 @@ document
   .getElementById("navigate-left")
   .addEventListener("click", () => navigator(-299.5));
 window.addEventListener("resize", countChange);
+/**
+ *Prototype function
+ */
+let cardDetails = function () {};
+cardDetails.prototype = new cityData();
 let sunnyDataList;
 let coldDataList;
 let rainyDataList;
 let city = document.querySelector("#card");
-let timer;
+let timerMiddle;
 let numberOfCards = 3;
 let currentDataList;
 let timeZone;
+let cardObject;
+/**
+ *function to sleep
+ * @param {*} ms
+ * @return {*} timeout
+ */
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 /**
  *function to sleep
  * @param {*} ms
@@ -63,8 +77,8 @@ function sunnyIconClick() {
   );
   currentDataList = sunnyDataList;
   createCard(sunnyDataList, "sunnyIcon");
-  clearInterval(timer);
-  timer = setInterval(createCard, 500, sunnyDataList, "sunnyIcon");
+  clearInterval(timerMiddle);
+  timerMiddle = setInterval(createCard, 500, sunnyDataList, "sunnyIcon");
 }
 /**
  *function to execute when snow icon is clicked
@@ -92,8 +106,8 @@ function snowIconClick() {
   );
   currentDataList = coldDataList;
   createCard(coldDataList, "snowflakeIcon");
-  clearInterval(timer);
-  timer = setInterval(createCard, 500, coldDataList, "snowflakeIcon");
+  clearInterval(timerMiddle);
+  timerMiddle = setInterval(createCard, 500, coldDataList, "snowflakeIcon");
 }
 /**
  *function to execute when rainy icon is clicked
@@ -119,8 +133,8 @@ function rainyIconClick() {
   );
   currentDataList = rainyDataList;
   createCard(rainyDataList, "rainyIcon");
-  clearInterval(timer);
-  timer = setInterval(createCard, 500, rainyDataList, "rainyIcon");
+  clearInterval(timerMiddle);
+  timerMiddle = setInterval(createCard, 500, rainyDataList, "rainyIcon");
 }
 /**
  *function to create cards
@@ -130,27 +144,30 @@ function rainyIconClick() {
 function createCard(dataList, weatherCondition) {
   let cardNumber = 0;
   document.getElementById("all-cards").replaceChildren();
-  for (let i in dataList) {
+  for (let cityData in dataList) {
     if (cardNumber + 1 <= numberOfCards || cardNumber <= 2) {
+      cardObject = new cardDetails();
+      cardObject.setDetails(dataList[cityData]);
       let clone = city.cloneNode(true);
       clone.id = "card" + cardNumber;
       city.before(clone);
-      clone.querySelector("#city-name").innerText = dataList[i].cityName;
+      clone.querySelector("#city-name").innerText = cardObject.getCityName();
       clone.querySelector("#city-temperature").innerText =
-        dataList[i].temperature;
-      clone.querySelector("#city-humidity").innerText = dataList[i].humidity;
+        cardObject.getTemperature();
+      clone.querySelector("#city-humidity").innerText =
+        cardObject.getHumidity();
       clone.querySelector("#city-precipitation").innerText =
-        dataList[i].precipitation;
+        cardObject.getPrecipitation();
       clone.querySelector("#city-temp-image").src =
         "Assets/" + weatherCondition + ".svg";
       timeZone = new Date().toLocaleString("en-US", {
-        timeZone: dataList[i].timeZone,
+        timeZone: cardObject.getTimeZone(),
       });
       setDateTime(clone);
       clone.setAttribute(
         "style",
         "background-image:url('Assets/" +
-          dataList[i].cityName.toLowerCase() +
+          dataList[cityData].cityName.toLowerCase() +
           ".svg')"
       );
       cardNumber++;
@@ -167,7 +184,7 @@ function setDateTime(clone) {
   let hour = new Date(timeZone).getHours();
   if (hour > 12) {
     clone.querySelector("#city-time").innerText =
-    String(hour-12).padStart(2, "0") +
+      String(hour - 12).padStart(2, "0") +
       ":" +
       String(new Date(timeZone).getMinutes()).padStart(2, "0") +
       " PM";
@@ -195,41 +212,6 @@ function setDateTime(clone) {
     "-" +
     new Date(timeZone).getFullYear();
 }
-/**
- *function to execute when card count changes
- */
-function countChange() {
-  numberOfCards = document.getElementById("display-count").value;
-  let displayCount =
-    numberOfCards < currentDataList.length
-      ? numberOfCards
-      : currentDataList.length;
-  if (
-    displayCount * 282 >=
-    document.getElementById("all-cards-with-navigate").clientWidth
-  ) {
-    document
-      .getElementById("navigate-left")
-      .setAttribute("style", "visibility:visible");
-    document
-      .getElementById("navigate-right")
-      .setAttribute("style", "visibility:visible");
-    document
-      .getElementById("all-cards")
-      .setAttribute("style", "width:fit-content");
-  } else {
-    document
-      .getElementById("navigate-left")
-      .setAttribute("style", "visibility:hidden");
-    document
-      .getElementById("navigate-right")
-      .setAttribute("style", "visibility:hidden");
-    document
-      .getElementById("all-cards")
-      .setAttribute("style", "justify-content:center");
-  }
-}
-
 /**
  *function to execute when card count changes
  */
