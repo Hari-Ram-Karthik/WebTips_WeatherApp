@@ -48,22 +48,6 @@ async function navigator(value) {
 }
 
 /**
- *async function to wait to fetch data from glitch
- */
-const asyncAwaitMiddle = async () => {
-  await new Promise((resolve) => {
-    setTimeout(() => resolve(), 1000);
-  });
-  sunnyIconClick();
-};
-
-(function () {
-  asyncAwaitMiddle();
-  clearInterval(loadDataCard);
-  loadDataCard = setInterval(asyncAwaitMiddle, 14400000);
-})();
-
-/**
  *function to execute when sunny icon is clicked
  */
 function sunnyIconClick() {

@@ -1,25 +1,34 @@
+const { fork } = require("child_process");
 const path = require("path");
 const express = require("express");
 const app = express();
 app.use(express.json());
-const {
-  allTimeZones,
-  timeForOneCity,
-  nextNhoursWeather,
-} = require("./timeZone.js");
 const PORT = 8000;
 let allCityWeatherData;
 
 ///to send all cities timeZone
-app.get("/all-timezone-cities", (req, res) => {
-  allCityWeatherData = allTimeZones();
-  res.json(allCityWeatherData);
+app.get("/all-timezone-cities", function (req, res) {
+  // create a Child process using fork
+  let allTimezon = fork(__dirname + "/childModule.js");
+  allTimezon.on("message", (weatherinfo) => {
+    allCityWeatherData = weatherinfo;
+    res.json(weatherinfo);
+  });
+  allTimezon.send({ messagename: "GetAllTimeZone", messagebody: {} });
 });
 
 ///to send html page and to send city time
 app.get("/", (req, res) => {
   if (req.query.city) {
-    res.json(timeForOneCity(req.query.city));
+    // create a Child process using fork
+    let cityInfo = fork(__dirname + "/childModule.js");
+    cityInfo.on("message", (cityData) => {
+      res.json(cityData);
+    });
+    cityInfo.send({
+      messagename: "GetcityInfo",
+      messagebody: { cityname: req.query.city },
+    });
   } else if (req.url.endsWith("/")) {
     app.use(express.static("./"));
     res.sendFile(path.join(__dirname, "Weather.html"));
@@ -33,13 +42,19 @@ app.get("/", (req, res) => {
 ///to send hourly forecast for one city
 app.post("/hourly-forecast", (req, res) => {
   if (req.body.city_Date_Time_Name && req.body.hours) {
-    res.json(
-      nextNhoursWeather(
-        req.body.city_Date_Time_Name,
-        req.body.hours,
-        allCityWeatherData
-      )
-    );
+    //create a Child process using fork
+    let temperature = fork(__dirname + "/childModule.js");
+    temperature.on("message", (nextFiveHrs) => {
+      res.json(nextFiveHrs);
+    });
+    temperature.send({
+      messagename: "GetNHourWeather",
+      messagebody: {
+        cityDTN: req.body.city_Date_Time_Name,
+        hours: req.body.hours,
+        weatherData: allCityWeatherData,
+      },
+    });
   } else {
     res
       .status(404)
