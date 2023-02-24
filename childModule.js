@@ -3,7 +3,7 @@ const {
   allTimeZones,
   timeForOneCity,
   nextNhoursWeather,
-} = require("./timeZone.js");
+} = require("npm_hariram");
 /* The listener will receive a message from server.js(parent) and based on that
     message a particular function is called and the resulted data is returned to server.js.*/
 process.on("message", (message) => {

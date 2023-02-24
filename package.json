@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "body-parser": "^1.20.1",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "npm_hariram": "^1.0.0"
   }
 }
