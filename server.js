@@ -3,32 +3,61 @@ const path = require("path");
 const express = require("express");
 const app = express();
 app.use(express.json());
+const EventEmitter = require("events");
+const eventEmitter = new EventEmitter();
 const PORT = 8000;
 let allCityWeatherData;
 
-///to send all cities timeZone
-app.get("/all-timezone-cities", function (req, res) {
+//event emitter
+eventEmitter.on("getAllData", (res, messagename) => {
   // create a Child process using fork
   let allTimezon = fork(__dirname + "/childModule.js");
   allTimezon.on("message", (weatherinfo) => {
     allCityWeatherData = weatherinfo;
     res.json(weatherinfo);
   });
-  allTimezon.send({ messagename: "GetAllTimeZone", messagebody: {} });
+  allTimezon.send({ messagename: messagename, messagebody: {} });
+});
+
+//event emitter
+eventEmitter.on("getCityData", (res, req, messagename) => {
+  // create a Child process using fork
+  let cityInfo = fork(__dirname + "/childModule.js");
+  cityInfo.on("message", (cityData) => {
+    res.json(cityData);
+  });
+  cityInfo.send({
+    messagename: messagename,
+    messagebody: { cityname: req.query.city },
+  });
+});
+
+//event emitter
+eventEmitter.on("getHourlyForecast", (res, req, messagename) => {
+  //create a Child process using fork
+  let temperature = fork(__dirname + "/childModule.js");
+  temperature.on("message", (nextFiveHrs) => {
+    res.json(nextFiveHrs);
+  });
+  temperature.send({
+    messagename: messagename,
+    messagebody: {
+      cityDTN: req.body.city_Date_Time_Name,
+      hours: req.body.hours,
+      weatherData: allCityWeatherData,
+    },
+  });
+});
+
+///to send all cities timeZone
+app.get("/all-timezone-cities", function (req, res) {
+  eventEmitter.emit("getAllData", res, "GetAllTimeZone");
 });
 
 ///to send html page and to send city time
 app.get("/", (req, res) => {
   if (req.query.city) {
-    // create a Child process using fork
-    let cityInfo = fork(__dirname + "/childModule.js");
-    cityInfo.on("message", (cityData) => {
-      res.json(cityData);
-    });
-    cityInfo.send({
-      messagename: "GetcityInfo",
-      messagebody: { cityname: req.query.city },
-    });
+    eventEmitter.emit("getCityData", res, req, "GetcityInfo");
   } else if (req.url.endsWith("/")) {
     app.use(express.static("./"));
     res.sendFile(path.join(__dirname, "Weather.html"));
@@ -42,19 +71,7 @@ app.get("/", (req, res) => {
 ///to send hourly forecast for one city
 app.post("/hourly-forecast", (req, res) => {
   if (req.body.city_Date_Time_Name && req.body.hours) {
-    //create a Child process using fork
-    let temperature = fork(__dirname + "/childModule.js");
-    temperature.on("message", (nextFiveHrs) => {
-      res.json(nextFiveHrs);
-    });
-    temperature.send({
-      messagename: "GetNHourWeather",
-      messagebody: {
-        cityDTN: req.body.city_Date_Time_Name,
-        hours: req.body.hours,
-        weatherData: allCityWeatherData,
-      },
-    });
+    eventEmitter.emit("getHourlyForecast", res, req, "GetNHourWeather");
   } else {
     res
       .status(404)
