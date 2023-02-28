@@ -1,0 +1,21 @@
+{
+  "name": "weather",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Weather.html",
+  "type":"commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://hariramkarthik@bitbucket.org/hariramkarthik/weather.git"
+  },
+  "author": "Hari Ram Karthik M",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/hariramkarthik/weather/issues"
+  },
+  "homepage": "https://bitbucket.org/hariramkarthik/weather#readme"
+}

@@ -72,8 +72,7 @@ const fetchData = async () => {
 /**
  *function to execute when city changes
  */
-async function citySelectChange() {
-  await getHourWeather(cityOptionSelected.value);
+function citySelectChange() {
   let found = false;
   for (let cityDataIndex in allData) {
     if (cityOptionSelected.value == allData[cityDataIndex].cityName) {
@@ -89,7 +88,8 @@ async function citySelectChange() {
 /**
  *function to set values
  */
-function setValues() {
+ async function setValues() {
+  await getHourWeather(cityOptionSelected.value);
   cityObject = new cityData(allData[citySelectedIndex]);
   cityOptionSelected.setAttribute("style", "border-color:transperent");
   errorMessage.innerHTML = "";
