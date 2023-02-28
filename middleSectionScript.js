@@ -51,7 +51,7 @@ async function navigator(value) {
  */
 const asyncAwaitMiddle = async () => {
   await new Promise((resolve) => {
-    setTimeout(() => resolve(), 3000);
+    setTimeout(() => resolve(), 1000);
   });
   sunnyIconClick();
 };
