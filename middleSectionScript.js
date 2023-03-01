@@ -26,6 +26,7 @@ let numberOfCards = 3;
 let currentDataList;
 let timeZone;
 let cardObject;
+let loadDataCard;
 /**
  *function to sleep
  * @param {*} ms
@@ -58,6 +59,8 @@ const asyncAwaitMiddle = async () => {
 
 (function () {
   asyncAwaitMiddle();
+  clearInterval(loadDataCard);
+  loadDataCard = setInterval(asyncAwaitMiddle, 14400000);
 })();
 
 /**

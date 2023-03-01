@@ -53,8 +53,10 @@ let fourthHourTemp = document.getElementById("fourth-hour-temp");
 let fifthHourTemp = document.getElementById("fivth-hour-temp");
 let hourlyTemp = [];
 let errorMessage = document.getElementById("error-message");
+let fetchDataTimer;
 const fetchData = async () => {
   await fetchAllCityData();
+  cityOptions.innerHTML="";
   for (let cityData in allData) {
     cityOptions.innerHTML =
       cityOptions.innerHTML +
@@ -67,6 +69,8 @@ const fetchData = async () => {
 
 (function () {
   fetchData();
+  clearInterval(fetchDataTimer);
+  fetchDataTimer = setInterval(fetchData, 3600000);
 })();
 
 /**

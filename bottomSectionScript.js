@@ -17,6 +17,7 @@ let continent = document.querySelector("#continent");
 let allDataCopy;
 let timerBottom;
 let continentCardObject;
+let loadContinentCard;
 /**
  *async function to wait to fetch data from glitch
  */
@@ -34,6 +35,8 @@ const asyncAwaitBottom = async () => {
 
 (function () {
   asyncAwaitBottom();
+  clearInterval(loadContinentCard);
+  loadContinentCard = setInterval(asyncAwaitBottom, 14400000);
 })();
 
 /**

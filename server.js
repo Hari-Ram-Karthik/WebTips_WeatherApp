@@ -1,7 +1,7 @@
-const fs = require("fs");
-const http = require("http");
 const path = require("path");
-const { stringify } = require("querystring");
+const express = require("express");
+const app = express();
+app.use(express.json());
 const {
   allTimeZones,
   timeForOneCity,
@@ -9,72 +9,46 @@ const {
 } = require("./timeZone.js");
 const PORT = 8000;
 let allCityWeatherData;
-let cityData;
-let hourlyForecast;
 
-const MIME_TYPES = {
-  default: "application/octet-stream",
-  html: "text/html; charset=UTF-8",
-  js: "application/javascript",
-  css: "text/css",
-  png: "image/png",
-  jpg: "image/jpg",
-  gif: "image/gif",
-  ico: "image/x-icon",
-  svg: "image/svg+xml",
-};
+///to send all cities timeZone
+app.get("/all-timezone-cities", (req, res) => {
+  allCityWeatherData = allTimeZones();
+  res.json(allCityWeatherData);
+});
 
-const STATIC_PATH = path.join(process.cwd(), "./");
+///to send html page and to send city time
+app.get("/", (req, res) => {
+  if (req.query.city) {
+    res.json(timeForOneCity(req.query.city));
+  } else if (req.url.endsWith("/")) {
+    app.use(express.static("./"));
+    res.sendFile(path.join(__dirname, "Weather.html"));
+  } else {
+    res
+      .status(404)
+      .json({ Error: "Not a valid EndPoint. Please check API Doc" });
+  }
+});
 
-const toBool = [() => true, () => false];
+///to send hourly forecast for one city
+app.post("/hourly-forecast", (req, res) => {
+  if (req.body.city_Date_Time_Name && req.body.hours) {
+    res.json(
+      nextNhoursWeather(
+        req.body.city_Date_Time_Name,
+        req.body.hours,
+        allCityWeatherData
+      )
+    );
+  } else {
+    res
+      .status(404)
+      .json({ Error: "Not a valid EndPoint. Please check API Doc" });
+  }
+});
 
-/**
- *async function to load files
- * @param {*} url
- * @return {*} 
- */
-const prepareFile = async (url) => {
-  const paths = [STATIC_PATH, url];
-  if (url.endsWith("/")) paths.push("Weather.html");
-  const filePath = path.join(...paths);
-  const pathTraversal = !filePath.startsWith(STATIC_PATH);
-  const exists = await fs.promises.access(filePath).then(...toBool);
-  const found = !pathTraversal && exists;
-  const streamPath = found ? filePath : STATIC_PATH + "/404.html";
-  const ext = path.extname(streamPath).substring(1).toLowerCase();
-  const stream = fs.createReadStream(streamPath);
-  return { found, ext, stream };
-};
-
-///crerating server and responce to requested url
-http
-  .createServer(async (req, res) => {
-    const file = await prepareFile(req.url);
-    const statusCode = file.found ? 200 : 404;
-    const mimeType = MIME_TYPES[file.ext] || MIME_TYPES.default;
-    res.writeHead(statusCode, { "Content-Type": mimeType });
-    file.stream.pipe(res);
-    if (req.url === "/all-timezone-cities") {
-      res.writeHead(200, { "Content-Type": "text/json" });
-      allCityWeatherData=allTimeZones();
-      res.write(JSON.stringify(allCityWeatherData));
-      res.end();
-    } else if (req.url.split("=")[0]==="/?city") {
-      res.writeHead(200, { "Content-Type": "text/json" });
-      let cityName=req.url.split("=")[1];
-      cityData=timeForOneCity(cityName);
-      res.write(JSON.stringify(cityData));
-      res.end();
-    } else if (req.url === "/hourly-forecast") {
-      res.writeHead(200, { "Content-Type": "text/json" });
-      if(cityData.city_Date_Time_Name){
-        hourlyForecast=nextNhoursWeather(cityData.city_Date_Time_Name,6,allCityWeatherData);
-        res.write(JSON.stringify(hourlyForecast));
-        res.end();
-      }
-    }
-    console.log(`${req.method} ${req.url} ${statusCode}`);
-  })
-  .listen(PORT);
-
+///to listen to server at given port
+app.listen(PORT, (error) => {
+  if (error) console.log("Error occurred, server can't start", error);
+});
 console.log(`Server running at http://127.0.0.1:${PORT}/`);
