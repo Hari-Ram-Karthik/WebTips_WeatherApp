@@ -65,6 +65,8 @@ const fetchData = async () => {
       '">';
   }
   citySelectChange();
+  sunnyIconClick();
+  bottomSection();
 };
 
 (function () {

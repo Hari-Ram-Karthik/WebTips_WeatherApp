@@ -21,23 +21,14 @@ let loadContinentCard;
 /**
  *async function to wait to fetch data from glitch
  */
-const asyncAwaitBottom = async () => {
-  await new Promise((resolve) => {
-    setTimeout(() => resolve(), 1000);
-  });
+function bottomSection() {
   allDataCopy = Object.values(allData);
   createContinentCard();
   setTimeCityName();
   clearInterval(timerBottom);
   timerBottom = setInterval(setTimeCityName, 500);
   sortContinent();
-};
-
-(function () {
-  asyncAwaitBottom();
-  clearInterval(loadContinentCard);
-  loadContinentCard = setInterval(asyncAwaitBottom, 14400000);
-})();
+}
 
 /**
  *Function to create continent wise card
