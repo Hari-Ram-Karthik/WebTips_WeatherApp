@@ -1,0 +1,154 @@
+.middle {
+  height: auto;
+}
+
+.top-line {
+  display: flex;
+  flex-direction: row;
+  width: 98%;
+}
+
+.line {
+  align-items: center;
+  color: #ffffff;
+  display: flex;
+  font-size: 140%;
+  justify-content: flex-end;
+  width: 65%;
+}
+
+.icons-display-card {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  width: 50%;
+}
+
+.icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 35%;
+}
+
+.sunny-img {
+  border-bottom-color: #00c0f1;
+  border-bottom-style: solid;
+}
+
+.display-cards-number {
+  color: #ffffff;
+  font-size: 100%;
+}
+
+input {
+  background-color: gray;
+  color: #ffffff;
+  width: 30%;
+}
+
+.cards-with-navigate {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.navigate {
+  background: gray;
+  border-radius: 50%;
+  height: 40px;
+  visibility: hidden;
+  width: 100px;
+}
+
+.navigate-symbol {
+  font-size: 200%;
+  font-weight: bolder;
+  padding-left: 10px;
+  user-select: none;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  /* width: fit-content; */
+}
+
+.all-card-with-scroll {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 200%;
+}
+
+.card {
+  background-position-x: right;
+  background-position-y: bottom;
+  background-repeat: no-repeat;
+  background-size: 65%;
+  box-shadow: 5px 5px 5px 5px gray;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 260px;
+  justify-content: flex-start;
+  margin: 20px;
+  padding: 10px;
+  width: 225px;
+}
+
+.card:hover {
+  background-size: 75%;
+  box-shadow: 2px 2px 2px 2px black;
+}
+
+.first-line {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  font-size: 120%;
+  height: 20%;
+}
+
+.img-temp {
+  display: flex;
+  justify-content: flex-end;
+  width: 70%;
+}
+
+.humidity {
+  height: 20px;
+  margin-top: 30px;
+}
+
+.time-date-middle {
+  height: 20px;
+}
+
+.precipitation {
+  height: 20px;
+  margin-top: 25px;
+}
+
+@media screen and (max-width: 1100px) {
+  .line {
+    font-size: 115%;
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .line {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .line {
+    font-size: 110%;
+  }
+
+  .display-cards-number {
+    font-size: 90%;
+  }
+}

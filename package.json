@@ -1,0 +1,30 @@
+{
+  "name": "weather",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Weather.html",
+  "type": "commonjs",
+  "scripts": {
+    "devstart": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://hariramkarthik@bitbucket.org/hariramkarthik/weather.git"
+  },
+  "author": "Hari Ram Karthik M",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/hariramkarthik/weather/issues"
+  },
+  "homepage": "https://bitbucket.org/hariramkarthik/weather#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "npm_hariram": "^1.0.0"
+  }
+}
